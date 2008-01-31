@@ -1,0 +1,16 @@
+obj\Debug\GA Traveling Sales Person.exe
+obj\Debug\GA Traveling Sales Person.pdb
+bin\Debug\GA Traveling Sales Person.exe
+bin\Debug\GA Traveling Sales Person.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\GA_Traveling_Sales_Person.MainForm.resources
+obj\Debug\GA_Traveling_Sales_Person.Properties.Resources.resources
+obj\Debug\GA Traveling Sales Person.csproj.GenerateResource.Cache
+bin\Release\GA Traveling Sales Person.exe
+bin\Release\GA Traveling Sales Person.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\GA_Traveling_Sales_Person.MainForm.resources
+obj\Release\GA_Traveling_Sales_Person.Properties.Resources.resources
+obj\Release\GA Traveling Sales Person.csproj.GenerateResource.Cache
+obj\Release\GA Traveling Sales Person.exe
+obj\Release\GA Traveling Sales Person.pdb
