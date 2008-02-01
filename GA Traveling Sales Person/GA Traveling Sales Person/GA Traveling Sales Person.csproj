@@ -36,6 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrossOver.cs" />
     <Compile Include="GA.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
