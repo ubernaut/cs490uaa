@@ -62,7 +62,7 @@ namespace GA_Traveling_Sales_Person
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(42, 141);
+            this.label1.Location = new System.Drawing.Point(39, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 17);
             this.label1.TabIndex = 3;
@@ -70,14 +70,14 @@ namespace GA_Traveling_Sales_Person
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(148, 141);
+            this.textBox2.Location = new System.Drawing.Point(148, 70);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 4;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(148, 216);
+            this.textBox3.Location = new System.Drawing.Point(148, 99);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 5;
@@ -86,7 +86,7 @@ namespace GA_Traveling_Sales_Person
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 220);
+            this.label3.Location = new System.Drawing.Point(39, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 6;
@@ -95,7 +95,7 @@ namespace GA_Traveling_Sales_Person
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(42, 298);
+            this.label4.Location = new System.Drawing.Point(39, 138);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 17);
             this.label4.TabIndex = 7;
@@ -103,7 +103,7 @@ namespace GA_Traveling_Sales_Person
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(148, 298);
+            this.textBox4.Location = new System.Drawing.Point(148, 138);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 22);
             this.textBox4.TabIndex = 8;
@@ -119,11 +119,11 @@ namespace GA_Traveling_Sales_Person
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(42, 360);
+            this.button1.Location = new System.Drawing.Point(148, 356);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
+            this.button1.Text = "GO!";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Validated += new System.EventHandler(this.button1_Validated);
             this.button1.Click += new System.EventHandler(this.button1_Click);
