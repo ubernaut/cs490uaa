@@ -24,7 +24,16 @@ namespace GA_Traveling_Sales_Person
             TSPGraph myTSP = new TSPGraph(3, i);
             TSPGraph myTPS2 = new TSPGraph(3, i);
 
+            Tour mytour = new Tour(3);
             
+            
+            
+            
+            mytour.CalcFitness(myTSP);
+
+            
+            Console.Out.WriteLine(mytour.Cost);
+
         }
 
     }
