@@ -14,8 +14,8 @@ namespace GA_Traveling_Sales_Person
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-
+            //Application.Run(new MainForm());
+            Application.Run(new CrossoverTest());
         }
     }
 }

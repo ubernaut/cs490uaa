@@ -14,9 +14,9 @@ namespace GA_Traveling_Sales_Person
         /// <param name="randSeed"></param>
         /// <param name="cityCount"></param>
         /// 
-        private List<Tour> population = new Tour();
+        private List<Tour> population = new List<Tour>();
         private Tour bestOfRun= new Tour();
-        private TSPGraph lookUp = new TSPGraph();
+        private TSPGraph lookUp;
         private int popSize = 0;
         private int cityCount = 0;
         private int maxGens = 0;
@@ -73,7 +73,7 @@ namespace GA_Traveling_Sales_Person
 
         public void Selection() 
         { 
-            List<Tour> nextGen = new List<Tour>;
+            List<Tour> nextGen = new List<Tour>();
             
             
             foreach(Tour aRoute in population)

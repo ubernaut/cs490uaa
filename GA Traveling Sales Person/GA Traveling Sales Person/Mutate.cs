@@ -6,14 +6,14 @@ namespace GA_Traveling_Sales_Person
 {
     class Mutate
     {
-        private TSPGraph myGraph=new TSPGraph();
+        private TSPGraph myGraph;
         public Mutate(TSPGraph theGraph) 
         {
             myGraph = theGraph;
         }
         public Tour MutateIt(Tour individual)
         {
-            Int32 cityCount = individual.Route.GetLength();
+            Int32 cityCount = individual.Route.Length;
             cityCount -= 1; //prevent out of bound exception
             int[] mutant = individual.Route;
             Random x = new Random();

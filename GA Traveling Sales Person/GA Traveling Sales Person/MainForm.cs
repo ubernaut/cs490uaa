@@ -46,7 +46,7 @@ namespace GA_Traveling_Sales_Person
         private void textBox1_Validated(object sender, EventArgs e)
         {
         
-                popSize = Int32.Parse(textBox1.Text());
+                popSize = Int32.Parse(textBox1.Text);
             
                 Console.Out.WriteLine(e);
             
