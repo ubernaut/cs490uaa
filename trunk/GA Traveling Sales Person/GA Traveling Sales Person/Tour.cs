@@ -6,6 +6,9 @@ namespace GA_Traveling_Sales_Person
 {
     class Tour
     {
+        
+        Random rand = new Random();
+
         int cost;
 
         public int Cost
@@ -28,10 +31,9 @@ namespace GA_Traveling_Sales_Person
         /// <param name="cityNum">number of cities in the tour</param>
         public Tour(int cityNum)
         {
-            Random rand = new Random();
-            //since we will always be starting and ending at city 0
-            //we only need (cityNum-1) nodes in the route
-            route = new int[cityNum-1];
+            
+
+            route = new int[cityNum];
             
             //initialize the route with all the cities in order
             for (int i = 0; i < cityNum-1; i++)
@@ -42,7 +44,7 @@ namespace GA_Traveling_Sales_Person
             //randomize the route
             for (int i = 0; i < cityNum; i++)
             {
-                int swapNum = rand.Next(1, cityNum + 1);
+                int swapNum = rand.Next(1, cityNum);
                 int temp = route[i];
                 route[i] = route[swapNum];
                 route[swapNum] = temp;
