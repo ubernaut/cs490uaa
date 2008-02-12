@@ -36,7 +36,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrossOver.cs" />
+    <Compile Include="CycleCrossOver.cs" />
+    <Compile Include="PMCrossOver.cs" />
     <Compile Include="GA.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

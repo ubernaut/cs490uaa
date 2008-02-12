@@ -5,95 +5,33 @@ using System.Text;
 namespace GA_Traveling_Sales_Person
 {
     /// <summary>
-    /// Class that contains all the crossover
-    /// functions for the GA
+    /// Partially Mapped CrossOver class
     /// </summary>
-    class CrossOver
+    class PMCrossOver
     {
         Random rand = new Random();
-        public CrossOver()
+        TSPGraph graph;
+
+        public PMCrossOver(TSPGraph graphIn)
         {
+            graph = graphIn;
         }
 
-        /// <summary>
-        /// Cycle Cross over of two parents
-        /// </summary>
-        /// <param name="father">Father Tour</param>
-        /// <param name="mother">Mother Tour</param>
-        /// <returns>A list of two child Tours</returns>
-        public List<Tour> CX2Child(Tour father, Tour mother)
-        {
-            Tour childA = CX1Child(father, mother);
-            Tour childB = CX1Child(mother, father);
-            List<Tour> childList = new List<Tour>();
-            childList.Add(childA);
-            childList.Add(childB);
-            return childList;
-
-        }
-
-        /// <summary>
-        /// Cycle Cross over of two parents 
-        /// </summary>
-        /// <param name="father">Father Tour</param>
-        /// <param name="mother">Mother Tour</param>
-        /// <returns>A single child Tour</returns>
-        public Tour CX1Child(Tour father, Tour mother)
-        {
-            //initialize the new child's route to all -1's
-            Tour child = new Tour();
-            int[] temp = new int[father.Route.Length];
-            for (int i = 0; i < father.Route.Length; i++)
-            {
-                temp = -1;
-            }
-            child.Route = temp;
-
-            int loc = 0;
-            int mothersGeneAtLoc;
-
-            //while there are still 'empty' spots
-            while (Array.IndexOf(child, -1) > -1)
-            {
-                //put the fathers gene in the child
-                child.Route[loc] = father.Route[loc];
-
-                //get the mothers gene at this locations
-                mothersGeneAtLoc = mother.Route[loc];
-
-                //if the mothers gene isn't in the child yet
-                if (Array.IndexOf(child, mothersGeneAtLoc) == -1)
-                {
-                    //find the location in the father of the mothers gene
-                    loc = Array.IndexOf(father, mothersGeneAtLoc);
-                }
-                else
-                {
-                    //swap the mother and the father
-                    Tour temp = father;
-                    father = mother;
-                    mother = temp;
-
-                    //find the next empty spot in the child
-                    loc = Array.IndexOf(child, -1);
-                }
-            }
-
-            return child;
-        }
+        
 
 
         /// <summary>
-        /// Partially Mapped Crossover Function
+        /// Partially Mapped CrossOver Function
         /// </summary>
         /// <param name="father"></param>
         /// <param name="mother"></param>
         /// <returns>Returns 2 children Tours in a List<Tour></returns>
-        public List<Tour> PMX2Child(Tour father, Tour mother)
+        public List<Tour> CrossOver2Child(Tour father, Tour mother)
         {
-            Tour childA = PMX1Child(father, mother);
-            Tour childB = PMX1Child(mother, father);
+            Tour childA = CrossOver1Child(father, mother);
+            Tour childB = CrossOver1Child(mother, father);
             List<Tour> childList = new List<Tour>();
+
             childList.Add(childA);
             childList.Add(childB);
             return childList;
@@ -101,17 +39,29 @@ namespace GA_Traveling_Sales_Person
         }
 
 
-
-        public Tour PMX1Child(Tour father, Tour mother)
+        /// <summary>
+        /// Partially Mapped CrossOver Function with random crossover points
+        /// </summary>
+        /// <param name="father"></param>
+        /// <param name="mother"></param>
+        /// <returns></returns>
+        public Tour CrossOver1Child(Tour father, Tour mother)
         {
             //randomly choose cross over section
-            int coStart = rand.Next(1, father.Route.Length - 1);    //Cross over start point, can be from index 1 to (n-2)
-            int coEnd = rand.Next(coStart + 1, father.Route.Length);                    //Cross over end point, can be from (start+1) to (n-1)
+            int coStart = rand.Next(1, father.Route.Length - 1);        //Cross over start point, can be from index 1 to (n-2)
+            int coEnd = rand.Next(coStart + 1, father.Route.Length);    //Cross over end point, can be from (start+1) to (n-1)
 
             return PMX1Child(father, mother, coStart, coEnd);
         }
 
-
+        /// <summary>
+        /// Partially Mapped CrossOver Function with specified crossover points
+        /// </summary>
+        /// <param name="father"></param>
+        /// <param name="mother"></param>
+        /// <param name="coStartIn"></param>
+        /// <param name="coEndIn"></param>
+        /// <returns></returns>
         public Tour PMX1Child(Tour father, Tour mother, int coStartIn, int coEndIn)
         {
             //create a child
@@ -180,7 +130,7 @@ namespace GA_Traveling_Sales_Person
 
 
 
-
+            child.CalcFitness(graph);
 
             return child;
         }
