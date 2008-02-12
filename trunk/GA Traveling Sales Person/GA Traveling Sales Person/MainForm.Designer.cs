@@ -36,9 +36,7 @@ namespace GA_Traveling_Sales_Person
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -109,17 +107,9 @@ namespace GA_Traveling_Sales_Person
             this.textBox4.TabIndex = 8;
             this.textBox4.Validated += new System.EventHandler(this.textBox4_Validated);
             // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(544, 60);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(285, 56);
-            this.trackBar1.TabIndex = 9;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(148, 356);
+            this.button1.Location = new System.Drawing.Point(148, 178);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -132,9 +122,8 @@ namespace GA_Traveling_Sales_Person
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 400);
+            this.ClientSize = new System.Drawing.Size(346, 332);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -147,7 +136,6 @@ namespace GA_Traveling_Sales_Person
             this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,7 +151,6 @@ namespace GA_Traveling_Sales_Person
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button1;
 
     }
