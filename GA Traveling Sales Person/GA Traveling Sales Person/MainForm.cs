@@ -30,8 +30,7 @@ namespace GA_Traveling_Sales_Person
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bestFitnessLabel.Text = "";
-            bestTourLabel.Text = "";
+
 
         }
 
@@ -93,13 +92,45 @@ namespace GA_Traveling_Sales_Person
         private void button1_Click(object sender, EventArgs e)
         {
             //instantiate GA and set in motion
-            
+
             ParseVariables();
             GA myGa = new GA(maxGen, popSize, randomSeed, townCount, probCrossOver, probMutate, probReproduce);
             myGa.Run();
-            
+
+            string pmxReport = "PMX \r\n";
+            for (int i = 0; i < 3; i++)
+            {
+                pmxReport += "Run"+i+" Tour: " + ArrayToString(myGa.pmxBestOfRun[i].Route) + "   Fitness: "+ myGa.pmxBestOfRun[i].Cost +"\r\n";
+
+            }
+            pmxReportBox.Text = pmxReport;
+
+            string oxReport = "OX \r\n";
+            for (int i = 0; i < 3; i++)
+            {
+                oxReport += "Run" + i + " Tour: " + ArrayToString(myGa.oxBestOfRun[i].Route) + "   Fitness: " + myGa.oxBestOfRun[i].Cost + "\r\n";
+            }
+            oxReportBox.Text = oxReport;
+
+            string cxReport = "CX \r\n";
+            for (int i = 0; i < 3; i++)
+            {
+                cxReport += "Run" + i + " Tour: " + ArrayToString(myGa.cxBestOfRun[i].Route) + "   Fitness: " + myGa.cxBestOfRun[i].Cost + "\r\n";
+            }
+            cxReportBox.Text = cxReport;
 
         }
+
+        private string ArrayToString(int[] arrayIn)
+        {
+            string temp ="";
+            for (int i = 0; i < arrayIn.Length; i++)
+            {
+                temp += arrayIn[i];
+            }
+            return temp;
+        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
