@@ -111,11 +111,11 @@ namespace GA_Traveling_Sales_Person
                 }
                 else if (i < Math.Round((popSize * (probCrossOver + probReproduce)), 0))
                 {
-                    mutatePool.Add(population[selectIndex]);
+                    reproducePool.Add(population[selectIndex]);
                 }
                 else if (i < Math.Round((popSize * (probCrossOver + probReproduce + probMutate)), 0))
                 {
-                    reproducePool.Add(population[selectIndex]);
+                    mutatePool.Add(population[selectIndex]);
                 }
                 else
                 {
@@ -126,7 +126,8 @@ namespace GA_Traveling_Sales_Person
 
             //do the operations and fill the new generation
             List<Tour> newPopulation = new List<Tour>(population.Count);
-
+            crossOverPool =  DoCrossOver(crossOverPool, coOp);
+            mutatePool = DoMutate(mutatePool);
 
 
 
@@ -136,12 +137,14 @@ namespace GA_Traveling_Sales_Person
             return new Tour();
         }
 
-        private Tour RunOX()
+
+
+        private List<Tour> DoCrossOver(List<Tour> crossOverPool, int coOp)
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        private Tour RunCX()
+        private List<Tour> DoMutate(List<Tour> mutatePool)
         {
             throw new Exception("The method or operation is not implemented.");
         }
@@ -170,8 +173,9 @@ namespace GA_Traveling_Sales_Person
         }
         private int Selection(double[] theSlices)
         {           
-            myPick = rand.NextDouble();
+            double myPick = rand.NextDouble();
             for (int i = 0; i < theSlices.Length; i++) if(theSlices[i] <= myPick) return i;
+            return -1000000;
         }
 
     }
