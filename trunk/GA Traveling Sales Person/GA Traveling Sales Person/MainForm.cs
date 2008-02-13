@@ -97,7 +97,7 @@ namespace GA_Traveling_Sales_Person
             ParseVariables();
             GA myGa = new GA(maxGen, popSize, randomSeed, townCount, probCrossOver, probMutate, probReproduce);
             myGa.Run();
-
+            
 
         }
 
