@@ -80,8 +80,9 @@ namespace GA_Traveling_Sales_Person
         {
 
             Tour childA = new Tour(); 
-            Tour childB = new Tour(); 
-
+            Tour childB = new Tour();
+            father = GetFather();
+            mother = GetMother();
 
             if (comboBox1.SelectedItem.Equals("Partially Mapped"))
             {
@@ -98,8 +99,8 @@ namespace GA_Traveling_Sales_Person
             else if (comboBox1.SelectedItem.Equals("Order"))
             {
                 OrderCX ox = new OrderCX(graph);
-                childA = ox.OrderCrossEm(father, mother);
-                childB = ox.OrderCrossEm(mother, father);
+                childA = ox.OrderCrossEm(father, mother, (int)numericUpDown1.Value, (int)numericUpDown2.Value);
+                childB = ox.OrderCrossEm(mother, father, (int)numericUpDown1.Value, (int)numericUpDown2.Value);
             }
             else
             {
