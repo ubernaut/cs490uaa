@@ -26,9 +26,9 @@ namespace GA_Traveling_Sales_Person
         private const int NUMBER_OF_RUNS = 3;
         private Random rand = new Random();
 
-        private Tour[] pmxBestOfRun;
-        private Tour[] cxBestOfRun;
-        private Tour[] oxBestOfRun;
+        public Tour[] pmxBestOfRun;
+        public Tour[] cxBestOfRun;
+        public Tour[] oxBestOfRun;
 
 
 
@@ -62,7 +62,6 @@ namespace GA_Traveling_Sales_Person
         {
             for (int i = 0; i < NUMBER_OF_RUNS; i++)
             {
-
                 pmxBestOfRun[i] = RunAllGens(0);
                 oxBestOfRun[i] = RunAllGens(1);
                 cxBestOfRun[i] = RunAllGens(2);

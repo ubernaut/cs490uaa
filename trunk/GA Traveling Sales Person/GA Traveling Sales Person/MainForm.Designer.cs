@@ -40,19 +40,17 @@ namespace GA_Traveling_Sales_Person
             this.doRun = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.bestTourLabel = new System.Windows.Forms.Label();
-            this.bestFitnessLabel = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxProbCO = new System.Windows.Forms.TextBox();
             this.textBoxProbMut = new System.Windows.Forms.TextBox();
             this.textBoxProbRep = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.pmxReportBox = new System.Windows.Forms.TextBox();
+            this.oxReportBox = new System.Windows.Forms.TextBox();
+            this.cxReportBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxPopSize
@@ -93,7 +91,7 @@ namespace GA_Traveling_Sales_Person
             this.textBoxMaxGen.Name = "textBoxMaxGen";
             this.textBoxMaxGen.Size = new System.Drawing.Size(76, 20);
             this.textBoxMaxGen.TabIndex = 4;
-            this.textBoxMaxGen.Text = "50";
+            this.textBoxMaxGen.Text = "100";
             // 
             // textBoxTownCount
             // 
@@ -102,7 +100,7 @@ namespace GA_Traveling_Sales_Person
             this.textBoxTownCount.Name = "textBoxTownCount";
             this.textBoxTownCount.Size = new System.Drawing.Size(76, 20);
             this.textBoxTownCount.TabIndex = 5;
-            this.textBoxTownCount.Text = "5";
+            this.textBoxTownCount.Text = "9";
             this.textBoxTownCount.Validated += new System.EventHandler(this.textBox3_Validated);
             // 
             // label3
@@ -137,7 +135,7 @@ namespace GA_Traveling_Sales_Person
             // 
             // doRun
             // 
-            this.doRun.Location = new System.Drawing.Point(131, 288);
+            this.doRun.Location = new System.Drawing.Point(131, 254);
             this.doRun.Margin = new System.Windows.Forms.Padding(2);
             this.doRun.Name = "doRun";
             this.doRun.Size = new System.Drawing.Size(56, 19);
@@ -149,7 +147,7 @@ namespace GA_Traveling_Sales_Person
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(290, 350);
+            this.button2.Location = new System.Drawing.Point(425, 254);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(99, 23);
             this.button2.TabIndex = 11;
@@ -160,55 +158,6 @@ namespace GA_Traveling_Sales_Person
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Tour:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 41);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Fitness:";
-            // 
-            // bestTourLabel
-            // 
-            this.bestTourLabel.AutoSize = true;
-            this.bestTourLabel.Location = new System.Drawing.Point(56, 28);
-            this.bestTourLabel.Name = "bestTourLabel";
-            this.bestTourLabel.Size = new System.Drawing.Size(27, 13);
-            this.bestTourLabel.TabIndex = 15;
-            this.bestTourLabel.Text = "blah";
-            // 
-            // bestFitnessLabel
-            // 
-            this.bestFitnessLabel.AutoSize = true;
-            this.bestFitnessLabel.Location = new System.Drawing.Point(56, 41);
-            this.bestFitnessLabel.Name = "bestFitnessLabel";
-            this.bestFitnessLabel.Size = new System.Drawing.Size(27, 13);
-            this.bestFitnessLabel.TabIndex = 16;
-            this.bestFitnessLabel.Text = "blah";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.bestFitnessLabel);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.bestTourLabel);
-            this.groupBox1.Location = new System.Drawing.Point(222, 22);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(167, 110);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Best of Run";
             // 
             // textBoxProbCO
             // 
@@ -261,18 +210,55 @@ namespace GA_Traveling_Sales_Person
             this.label9.TabIndex = 23;
             this.label9.Text = "Pr";
             // 
+            // pmxReportBox
+            // 
+            this.pmxReportBox.Location = new System.Drawing.Point(215, 25);
+            this.pmxReportBox.Multiline = true;
+            this.pmxReportBox.Name = "pmxReportBox";
+            this.pmxReportBox.Size = new System.Drawing.Size(309, 68);
+            this.pmxReportBox.TabIndex = 25;
+            // 
+            // oxReportBox
+            // 
+            this.oxReportBox.Location = new System.Drawing.Point(215, 99);
+            this.oxReportBox.Multiline = true;
+            this.oxReportBox.Name = "oxReportBox";
+            this.oxReportBox.Size = new System.Drawing.Size(309, 68);
+            this.oxReportBox.TabIndex = 26;
+            // 
+            // cxReportBox
+            // 
+            this.cxReportBox.Location = new System.Drawing.Point(215, 173);
+            this.cxReportBox.Multiline = true;
+            this.cxReportBox.Name = "cxReportBox";
+            this.cxReportBox.Size = new System.Drawing.Size(309, 68);
+            this.cxReportBox.TabIndex = 27;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(280, 298);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(240, 26);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "By: John Buckland - asjmb56@uaa.alaska.edu\r\n     Collin Schroeder - collin.schroe" +
+                "der@gmail.com";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 385);
+            this.ClientSize = new System.Drawing.Size(532, 333);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cxReportBox);
+            this.Controls.Add(this.oxReportBox);
+            this.Controls.Add(this.pmxReportBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxProbRep);
             this.Controls.Add(this.textBoxProbMut);
             this.Controls.Add(this.textBoxProbCO);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.doRun);
             this.Controls.Add(this.textBoxRandSeed);
@@ -284,11 +270,9 @@ namespace GA_Traveling_Sales_Person
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxPopSize);
             this.Name = "MainForm";
-            this.Text = "s";
+            this.Text = "Traveling Sales Person";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,17 +291,16 @@ namespace GA_Traveling_Sales_Person
         private System.Windows.Forms.Button doRun;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label bestFitnessLabel;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label bestTourLabel;
         private System.Windows.Forms.TextBox textBoxProbRep;
         private System.Windows.Forms.TextBox textBoxProbMut;
         private System.Windows.Forms.TextBox textBoxProbCO;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox pmxReportBox;
+        private System.Windows.Forms.TextBox cxReportBox;
+        private System.Windows.Forms.TextBox oxReportBox;
+        private System.Windows.Forms.Label label6;
 
     }
 }
