@@ -17,7 +17,7 @@ namespace GA_Traveling_Sales_Person
             graph = graphIn;
         }
 
-        
+
 
 
         /// <summary>
@@ -66,68 +66,61 @@ namespace GA_Traveling_Sales_Person
         {
             //create a child
             Tour child = new Tour(father.Route.Length);
-            //initialize the child to have a route of all -1
-            for (int i = 0; i < child.Route.Length; i++)
-            {
-                child.Route[i] = -1;
-            }
 
-            //set crossover points
-            int coStart = coStartIn;
-            int coEnd = coEndIn;
+            //copy father to child
+            //child.Route = father.Route; //bad bad!! Routes are objects!
+            father.Route.CopyTo(child.Route,0);
 
-            //copy the cross over section from the mother to the child
-            for (int i = coStart; i <= coEnd; i++)
+            //copy cross over section of mother to child
+            for (int i = coStartIn; i <= coEndIn; i++)
             {
                 child.Route[i] = mother.Route[i];
             }
 
-
-
-            //for each gene in the cross over section
-            for (int i = coStart; i <= coEnd; i++)
+            //until we make a full pass and find no duplicates
+            bool duplicateFound = true;
+            while (duplicateFound)
             {
-                //if the mothers gene is not in the child yet
-                if (Array.IndexOf(child.Route, mother.Route[i]) == -1)
+                duplicateFound = false;
+
+                //for each gene in cross over section of child
+                for (int i = coStartIn; i <= coEndIn; i++)
                 {
-                    int locInMother = i;
-                    bool done = false;
-                    while (!done)
+
+                    int loc;
+                    //if the gene exist in the part before the crossover
+                    loc = IndexOfBefore(child.Route[i], child.Route, coStartIn);
+                    if (loc > -1)
                     {
-                        //get the value of the corresponding gene in the father
-                        int fathersGene = father.Route[locInMother];
+                        //replace the gene after the cross over
+                        //with the gene in the father that is at the location of the gene in the mother
+                        int geneLoc = Array.IndexOf(mother.Route, child.Route[i]);
+                        int fatherGene = father.Route[geneLoc];
+                        child.Route[loc] = fatherGene;
+                        duplicateFound = true;
 
-                        //find the location in the mother of the fathers gene
-                        locInMother = Array.IndexOf(mother.Route, fathersGene);
-
-                        //if that location in the child is empty
-                        if (child.Route[locInMother] == -1)
-                        {
-                            //fill it with the mothers gene
-                            child.Route[locInMother] = mother.Route[i];
-                            //go on to next mother gene
-                            done = true;
-                        }
-                        //else, we will start the cycle again by checking the fathers gene
                     }
 
 
+
+                    //if the gene exist in the part after the crossover
+                    loc = IndexOfAfter(child.Route[i], child.Route, coEndIn);
+                    if (loc > -1)
+                    {
+                        //replace the gene after the cross over
+                        //with the gene in the father that is at the location of the gene in the mother
+                        int geneLoc = Array.IndexOf(mother.Route, child.Route[i]);
+                        int fatherGene = father.Route[geneLoc];
+                        child.Route[loc] = fatherGene;
+                        duplicateFound = true;
+
+                    }
+
+
+
+
                 }
-                //else go to the next mother gene
-
-
             }
-
-            //for each child gene not yet filled
-            for (int i = 0; i < child.Route.Length; i++)
-            {
-                //copy from mother to child
-                if (child.Route[i] == -1)
-                {
-                    child.Route[i] = mother.Route[i];
-                }
-            }
-
 
 
             child.CalcFitness(graph);
@@ -135,8 +128,63 @@ namespace GA_Traveling_Sales_Person
             return child;
         }
 
+        /// <summary>
+        /// returns the first index of gene, that exists before the crossover point
+        /// </summary>
+        /// <param name="gene"></param>
+        /// <param name="route"></param>
+        /// <param name="coStart">cross over start</param>
+        /// <returns></returns>
+        private int IndexOfBefore(int gene, int[] route, int coStart)
+        {
+            int loc = -1;
 
 
+            bool found = false;
+            int i = 0;
+            while (!found && i < coStart)
+            {
+                if (route[i] == gene)
+                {
+                    found = true;
+                    loc = i;
+                }
+
+                i++;
+            }
+
+
+            return loc;
+        }
+
+        /// <summary>
+        /// returns the first index of gene, that exists after the crossover point
+        /// </summary>
+        /// <param name="gene"></param>
+        /// <param name="route"></param>
+        /// <param name="coEnd">cross over end</param>
+        /// <returns></returns>
+        private int IndexOfAfter(int gene, int[] route, int coEnd)
+        {
+            int loc = -1;
+
+
+            bool found = false;
+            int i = coEnd + 1;
+            while (!found && i < route.Length)
+            {
+                if (route[i] == gene)
+                {
+                    found = true;
+                    loc = i;
+                }
+
+                i++;
+            }
+
+
+            return loc;
+        }
 
     }
 }
