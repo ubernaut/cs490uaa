@@ -63,22 +63,21 @@ namespace GA_Traveling_Sales_Person
         {
             for (int i = 0; i < NUMBER_OF_RUNS; i++)
             {
-                pmxBestOfRun[i] = RunPMX();
-                //oxBestOfRun[i] = RunOX();
-                cxBestOfRun[i] = RunCX();
+                pmxBestOfRun[i] = RunAllGens(0);
+                //oxBestOfRun[i] = RunAllGens(1);
+                cxBestOfRun[i] = RunAllGens(2);
             }
 
         }
 
-
-
-        private Tour RunPMX()
+        private Tour RunAllGens(int coOp)
         {
             Tour bestOfGeneration;
             rand = new Random();
 
             //sample population
             List<Tour> population = new List<Tour>();
+
 
             //initialize to random individuals
             //and calculate their fitness
@@ -87,23 +86,48 @@ namespace GA_Traveling_Sales_Person
                 Tour temp = new Tour(cityCount);
                 temp.CalcFitness(graph);
                 population.Add(temp);
+
+
+
             }
+            //setup the roulette wheel with percentages of each individual
+            double[] slice = EvalPopulation(population);
 
 
 
 
-            //for each generation
-            for (int gen = 0; gen < maxGens; gen++)
+            //spin the wheel and build the selection pool
+            List<Tour> crossOverPool = new List<Tour>();
+            List<Tour> mutatePool = new List<Tour>();
+            List<Tour> reproducePool = new List<Tour>();
+            for (int i = 0; i < popSize; i++)
             {
-                //the next generation
-                List<Tour> newPopulation = new List<Tour>();     
+                int selectIndex = Selection(slice);
 
                 //seperate selection pools
-                List<Tour> crossOverPool = new List<Tour>();
-                List<Tour> mutatePool = new List<Tour>();
-                List<Tour> reproducePool = new List<Tour>();
+                if (i < Math.Round((popSize * probCrossOver), 0))
+                {
+                    crossOverPool.Add(population[selectIndex]);
+                }
+                else if (i < Math.Round((popSize * (probCrossOver + probReproduce)), 0))
+                {
+                    mutatePool.Add(population[selectIndex]);
+                }
+                else if (i < Math.Round((popSize * (probCrossOver + probReproduce + probMutate)), 0))
+                {
+                    reproducePool.Add(population[selectIndex]);
+                }
+                else
+                {
+                    throw new Exception("Error selecting the right pool");
+                }
 
             }
+
+            //do the operations and fill the new generation
+            List<Tour> newPopulation = new List<Tour>(population.Count);
+
+
 
 
 
