@@ -36,7 +36,16 @@ namespace GA_Traveling_Sales_Person
 
         }
 
+        public int GetCost(int srcCity, int destCity)
+        {
+            //the cost array is zero indexed, but the city numbers start at 1
+            int cost = 0;
 
+
+            cost = node[srcCity-1, destCity-1];
+
+            return cost;
+        }
 
     }
 }

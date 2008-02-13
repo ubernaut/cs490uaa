@@ -36,15 +36,15 @@ namespace GA_Traveling_Sales_Person
             route = new int[cityNum];
             
             //initialize the route with all the cities in order
-            for (int i = 0; i < cityNum-1; i++)
+            for (int i = 0; i < cityNum; i++)
             {
-                route[i] = rand.Next(1, cityNum + 1);
+                route[i] = rand.Next(1, cityNum+1);
             }
 
             //randomize the route
             for (int i = 0; i < cityNum; i++)
             {
-                int swapNum = rand.Next(1, cityNum);
+                int swapNum = rand.Next(0, cityNum);
                 int temp = route[i];
                 route[i] = route[swapNum];
                 route[swapNum] = temp;
@@ -68,9 +68,24 @@ namespace GA_Traveling_Sales_Person
             //TODO
             //fitness is calculated starting and ending at city 0
 
-            cost = Int32.MaxValue;
-  
-            
+            int fitness = 0;
+
+            //for each city in the tour
+            for (int i = 0; i < route.Length-2; i++)
+            {
+
+                //add up the cost from i to i+1
+                fitness += graph.GetCost(route[i], route[i + 1]);
+
+
+            }
+
+            //add the cost to go from the last city to the first
+            fitness += graph.GetCost(route[route.Length - 1], route[0]);
+
+
+
+            cost = fitness;
         }
     }
 }
