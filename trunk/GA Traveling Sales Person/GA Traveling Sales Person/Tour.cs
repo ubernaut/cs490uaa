@@ -7,7 +7,7 @@ namespace GA_Traveling_Sales_Person
     class Tour
     {
         
-        Random rand = new Random();
+        static Random rand = new Random();
 
         int cost;
 
