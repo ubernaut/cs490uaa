@@ -7,7 +7,6 @@ namespace GA_Traveling_Sales_Person
 {
     class OrderCX
     {
-
         private TSPGraph myGraph;
         
         public OrderCX(TSPGraph theGraph) 
@@ -37,8 +36,7 @@ namespace GA_Traveling_Sales_Person
 
             return OrderCrossEm(parentA, parentB, earlyCity, laterCity);
         
-        }
-        
+        }       
         public Tour OrderCrossEm(Tour parentA, Tour parentB, int earlyCity, int laterCity)
         {
             int cityCount = parentB.Route.Length;
@@ -76,14 +74,8 @@ namespace GA_Traveling_Sales_Person
                  }
             }
             Tour childToReturn = new Tour(parentA.Route.Length);
-            childToReturn.Route = theChildRoute.ToArray();
-            //parentA.Route.CopyTo(childToReturn.Route, 0);
-
-            //parentA.Route = theChildRoute.ToArray();
-            //parentA.CalcFitness(myGraph);
-                       
-            return childToReturn;
-        
+            childToReturn.Route = theChildRoute.ToArray();        
+            return childToReturn;       
         }
     }
 }
