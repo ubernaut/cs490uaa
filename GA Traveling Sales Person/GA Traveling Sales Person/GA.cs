@@ -47,11 +47,9 @@ namespace GA_Traveling_Sales_Person
             sumFit = 0;
             foreach (Tour individual in population) 
             {
-
                 individual.CalcFitness(lookUp);
                 sumFit += individual.Cost;
-                if (individual.Cost < bestOfRun.Cost) bestOfRun = individual;
-                   
+                if (individual.Cost < bestOfRun.Cost) bestOfRun = individual;  
             }
             currGenFit = sumFit / popSize;
             genFit.Add(currGenFit);
