@@ -113,12 +113,9 @@ namespace GA_Traveling_Sales_Person
 
             for (int i = 0; i < length; i++)
             {
-
                 textBox3.Text += childA.Route[i].ToString();
                 textBox4.Text += childB.Route[i].ToString();
             }
-
-
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -127,7 +124,6 @@ namespace GA_Traveling_Sales_Person
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
-
         }
 
 

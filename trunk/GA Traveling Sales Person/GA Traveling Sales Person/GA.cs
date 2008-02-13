@@ -129,7 +129,34 @@ namespace GA_Traveling_Sales_Person
 
         private List<Tour> DoCrossOver(List<Tour> crossOverPool, int coOp)
         {
-            throw new Exception("The method or operation is not implemented.");
+            PMCrossOver thePMX = new PMCrossOver(graph);
+            OrderCX theOX = new OrderCX(graph);
+            CycleCrossOver theCX = new CycleCrossOver(graph);
+            //Mutate theMutate = new Mutate();
+            List<Tour> nextGen = new List<Tour>();
+
+            for (int i = 0; i < crossOverPool.Count; i += 2)
+            {
+                Tour Fadda = crossOverPool[i];
+                Tour Mudda = crossOverPool[i + 1];
+                
+                switch (coOp)
+                {
+                    case 0:
+                        nextGen.Add(thePMX.CrossOver1Child(Fadda, Mudda));
+                        nextGen.Add(thePMX.CrossOver1Child(Mudda, Fadda));
+                        break;
+                    case 1:
+                        nextGen.Add(theOX.OrderCrossEm(Fadda, Mudda));
+                        nextGen.Add(theOX.OrderCrossEm(Mudda, Fadda));
+                        break;
+                    case 2:
+                        nextGen.Add(theCX.CrossOver1Child(Fadda, Mudda));
+                        nextGen.Add(theCX.CrossOver1Child(Mudda, Fadda));
+                        break;
+                }
+            }
+            return nextGen(); 
         }
 
         private List<Tour> DoMutate(List<Tour> mutatePool)
@@ -139,7 +166,6 @@ namespace GA_Traveling_Sales_Person
 
         private double[] EvalPopulation(List<Tour> generation)
         {
-
             Tour[] myGeneration=generation.ToArray();
             int popSize = myGeneration.Length;
             double[] genSlice = new double[popSize];
@@ -151,8 +177,12 @@ namespace GA_Traveling_Sales_Person
                 sumFit += individual.Cost;
             }
             int genIndex = 0;
+            double runningSum = 0;
             foreach (Tour individual in myGeneration){
-                genSlice[genIndex] = individual.Cost/sumFit;
+                double indFract = individual.Cost / sumFit;
+                runningSum += indFract;
+                genSlice[genIndex] = runningSum;
+                
                 genIndex += 1;
             }
 
