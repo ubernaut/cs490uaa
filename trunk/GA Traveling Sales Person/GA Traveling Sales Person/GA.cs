@@ -15,62 +15,140 @@ namespace GA_Traveling_Sales_Person
         /// <param name="cityCount"></param>
         /// 
         private List<Tour> population = new List<Tour>();
-        private Tour bestOfRun= new Tour();
-        private TSPGraph lookUp;
-        private int popSize = 0;
-        private int cityCount = 0;
-        private int maxGens = 0;
-        private int seed = 0;
-        private float currGenFit = 0;
-        private float sumFit = 0;
-        private List<float> genFit;
+        private Tour bestOfRun = new Tour();
+        private TSPGraph graph;
+        private int popSize;
+        private int cityCount;
+        private int maxGens;
+        private int seed;
+        private double probCrossOver;
+        private double probMutate;
+        private double probReproduce;
+        private const int NUMBER_OF_RUNS = 3;
 
-        public GA(int maxGeneration, int populationSize, int randSeed, int townCount)
+
+        private Tour[] pmxBestOfRun;
+        private Tour[] cxBestOfRun;
+        private Tour[] oxBestOfRun;
+
+
+
+        public GA(int maxGeneration, int populationSize, int randSeed, int townCount, double probCO, double probMut, double probRep)
         {
-            lookUp = new TSPGraph(cityCount, randSeed);
             maxGens = maxGeneration;
             popSize = populationSize;
             seed = randSeed;
             cityCount = townCount;
 
-            for (int i = 0; i < populationSize; i++)
-            {
-                population.Add(new Tour(cityCount));
-            }
-            EvalPopulation();
+            probCrossOver = probCO;
+            probMutate = probMut;
+            probReproduce = probRep;
 
+
+
+            pmxBestOfRun = new Tour[NUMBER_OF_RUNS];
+            cxBestOfRun = new Tour[NUMBER_OF_RUNS];
+            oxBestOfRun = new Tour[NUMBER_OF_RUNS];
+
+            graph = new TSPGraph(cityCount, seed);
 
         }
 
-        public void EvalPopulation() 
+        /// <summary>
+        /// Runs all the Cross over operations 3 times
+        /// and records best Tour of run for each
+        /// </summary>
+        public void Run()
         {
-            sumFit = 0;
-            foreach (Tour individual in population) 
+            for (int i = 0; i < NUMBER_OF_RUNS; i++)
             {
-                individual.CalcFitness(lookUp);
-                sumFit += individual.Cost;
-                if (individual.Cost < bestOfRun.Cost) bestOfRun = individual;  
-            }
-            currGenFit = sumFit / popSize;
-            genFit.Add(currGenFit);
-        }
-
-        public Tour Run() {
-
-            for (int i = 0; i < maxGens; i++)
-            {
-                //select individuals for crossover
-
-                //select individuals for mutation          
-
-                EvalPopulation();
+                pmxBestOfRun[i] = RunPMX();
+                //oxBestOfRun[i] = RunOX();
+                cxBestOfRun[i] = RunCX();
             }
 
-            return bestOfRun;
         }
 
-        public void Selection() 
-        { 
+
+
+        private Tour RunPMX()
+        {
+            Tour bestOfGeneration;
+            Random rand = new Random();
+
+            //sample population
+            List<Tour> population = new List<Tour>();
+
+            //initialize to random individuals
+            //and calculate their fitness
+            for (int i = 0; i < popSize; i++)
+            {
+                Tour temp = new Tour(cityCount);
+                temp.CalcFitness(graph);
+                population.Add(temp);
+            }
+
+
+
+
+            //for each generation
+            for (int gen = 0; gen < maxGens; gen++)
+            {
+                //the next generation
+                List<Tour> newPopulation = new List<Tour>();     
+
+                //seperate selection pools
+                List<Tour> crossOverPool = new List<Tour>();
+                List<Tour> mutatePool = new List<Tour>();
+                List<Tour> reproducePool = new List<Tour>();
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+            return new Tour();
+        }
+
+        private Tour RunOX()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        private Tour RunCX()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        private void EvalPopulation()
+        {
+            /*
+              sumFit = 0;
+              foreach (Tour individual in population) 
+              {
+
+                  individual.CalcFitness(lookUp);
+                  sumFit += individual.Cost;
+                  if (individual.Cost < bestOfRun.Cost) bestOfRun = individual;
+                   
+              }
+              currGenFit = sumFit / popSize;
+              genFit.Add(currGenFit);
+             */
+        }
+
+
+
+        private void Selection()
+        {
+            /*
             List<Tour> nextGen = new List<Tour>();
             
             
@@ -78,7 +156,7 @@ namespace GA_Traveling_Sales_Person
             {
                float routeChance = aRoute.Cost / currGenFit;
             }
-
+            */
         }
 
     }

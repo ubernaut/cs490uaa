@@ -8,12 +8,17 @@ using System.Windows.Forms;
 
 namespace GA_Traveling_Sales_Person
 {
-    
+
     public partial class MainForm : Form
     {
         private int popSize = 0;
-        private int generationCount = 0;
+        private int maxGen = 0;
         private int randomSeed = 0;
+        private int townCount = 0;
+        private double probCrossOver = 0;
+        private double probMutate = 0;
+        private double probReproduce = 0;
+
 
         public MainForm()
         {
@@ -25,16 +30,8 @@ namespace GA_Traveling_Sales_Person
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int i = 1337;
-            TSPGraph myTSP = new TSPGraph(3, i);
-            TSPGraph myTPS2 = new TSPGraph(3, i);
-
-
-
-            textBox1.Text = "This is my cool box yo";
-
-
-
+            bestFitnessLabel.Text = "";
+            bestTourLabel.Text = "";
 
         }
 
@@ -47,7 +44,7 @@ namespace GA_Traveling_Sales_Person
         {
             try
             {
-                popSize = Int32.Parse(textBox1.Text);
+                popSize = Int32.Parse(textBoxPopSize.Text);
 
                 Console.Out.WriteLine(e);
             }
@@ -60,7 +57,7 @@ namespace GA_Traveling_Sales_Person
 
         private void textBox2_Validated(object sender, EventArgs e)
         {
-            generationCount = Int32.Parse(textBox2.Text);
+            maxGen = Int32.Parse(textBoxMaxGen.Text);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -80,7 +77,7 @@ namespace GA_Traveling_Sales_Person
 
         private void textBox4_Validated(object sender, EventArgs e)
         {
-            randomSeed = Int32.Parse(textBox4.Text);
+            randomSeed = Int32.Parse(textBoxRandSeed.Text);
         }
 
         private void textBox3_Validated(object sender, EventArgs e)
@@ -96,6 +93,10 @@ namespace GA_Traveling_Sales_Person
         private void button1_Click(object sender, EventArgs e)
         {
             //instantiate GA and set in motion
+            
+            ParseVariables();
+            GA myGa = new GA(maxGen, popSize, randomSeed, townCount, probCrossOver, probMutate, probReproduce);
+            
 
 
         }
@@ -104,6 +105,23 @@ namespace GA_Traveling_Sales_Person
         {
             CrossOverTests test = new CrossOverTests();
             test.Show();
+        }
+
+        /// <summary>
+        /// Pulls the numbers out of the text boxes and sets the 
+        /// class variables
+        /// </summary>
+        private void ParseVariables()
+        {
+            popSize = Int32.Parse(textBoxPopSize.Text);
+            maxGen = Int32.Parse(textBoxMaxGen.Text);
+            randomSeed = Int32.Parse(textBoxRandSeed.Text);
+            townCount = Int32.Parse(textBoxTownCount.Text);
+
+            probCrossOver = Double.Parse(textBoxProbCO.Text);
+            probMutate = Double.Parse(textBoxProbMut.Text);
+            probReproduce = Double.Parse(textBoxProbRep.Text);
+
         }
 
     }
