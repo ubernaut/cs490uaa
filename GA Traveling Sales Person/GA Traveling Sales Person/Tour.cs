@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GA_Traveling_Sales_Person
 {
-    class Tour
+    class Tour : IComparable<Tour>
     {
         
         static Random rand = new Random();
@@ -38,7 +38,7 @@ namespace GA_Traveling_Sales_Person
             //initialize the route with all the cities in order
             for (int i = 0; i < cityNum; i++)
             {
-                route[i] = rand.Next(1, cityNum+1);
+                route[i] = i+1;
             }
 
             //randomize the route
@@ -87,5 +87,14 @@ namespace GA_Traveling_Sales_Person
 
             cost = fitness;
         }
+
+        #region IComparable<Tour> Members
+
+        public int CompareTo(Tour that)
+        {
+                return this.Cost - that.Cost;
+        }
+
+        #endregion
     }
 }

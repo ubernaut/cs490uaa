@@ -232,7 +232,7 @@ namespace GA_Traveling_Sales_Person
             this.textBoxProbRep.Name = "textBoxProbRep";
             this.textBoxProbRep.Size = new System.Drawing.Size(76, 20);
             this.textBoxProbRep.TabIndex = 20;
-            this.textBoxProbRep.Text = ".1";
+            this.textBoxProbRep.Text = ".07";
             // 
             // label5
             // 

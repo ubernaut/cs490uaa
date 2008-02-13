@@ -15,7 +15,6 @@ namespace GA_Traveling_Sales_Person
         /// <param name="cityCount"></param>
         /// 
         private List<Tour> population = new List<Tour>();
-        private Tour bestOfRun = new Tour();
         private TSPGraph graph;
         private int popSize;
         private int cityCount;
@@ -63,6 +62,7 @@ namespace GA_Traveling_Sales_Person
         {
             for (int i = 0; i < NUMBER_OF_RUNS; i++)
             {
+
                 pmxBestOfRun[i] = RunAllGens(0);
                 oxBestOfRun[i] = RunAllGens(1);
                 cxBestOfRun[i] = RunAllGens(2);
@@ -72,7 +72,9 @@ namespace GA_Traveling_Sales_Person
 
         private Tour RunAllGens(int coOp)
         {
-            Tour bestOfGeneration;
+            Tour bestOfRun = new Tour();
+            bestOfRun.Cost = Int32.MaxValue;
+
             rand = new Random();
 
             //sample population
@@ -166,7 +168,7 @@ namespace GA_Traveling_Sales_Person
             {
                 Tour Fadda = crossOverPool[i];
                 Tour Mudda = crossOverPool[i + 1];
-                
+
                 switch (coOp)
                 {
                     case 0:
@@ -183,7 +185,7 @@ namespace GA_Traveling_Sales_Person
                         break;
                 }
             }
-            return nextGen(); 
+            return nextGen;
         }
 
         private List<Tour> DoMutate(List<Tour> mutatePool)
@@ -211,11 +213,12 @@ namespace GA_Traveling_Sales_Person
             }
             int genIndex = 0;
             double runningSum = 0;
-            foreach (Tour individual in myGeneration){
+            foreach (Tour individual in myGeneration)
+            {
                 double indFract = individual.Cost / sumFit;
                 runningSum += indFract;
                 genSlice[genIndex] = runningSum;
-                
+
                 genIndex += 1;
             }
 
@@ -226,13 +229,22 @@ namespace GA_Traveling_Sales_Person
         {
             double myPick = rand.NextDouble();
             int num = -1000000;
-            for (int i = 0; i < theSlices.Length; i++)
+
+            int i = 0;
+            while (i < theSlices.Length && num == -1000000)
             {
-                if (theSlices[i] <= myPick)
+
+                if (myPick < theSlices[i])
                 {
-                    num= i;
+                    num = i;
                 }
+                i++;
             }
+            if (num == -1000000)
+            {
+                throw new Exception("Oh crappy! myPick was " + myPick);
+            }
+
             return num;
         }
 
