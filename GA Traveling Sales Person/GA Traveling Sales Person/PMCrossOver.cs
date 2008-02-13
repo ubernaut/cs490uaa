@@ -51,7 +51,7 @@ namespace GA_Traveling_Sales_Person
             int coStart = rand.Next(1, father.Route.Length - 1);        //Cross over start point, can be from index 1 to (n-2)
             int coEnd = rand.Next(coStart + 1, father.Route.Length);    //Cross over end point, can be from (start+1) to (n-1)
 
-            return PMX1Child(father, mother, coStart, coEnd);
+            return CrossOver1Child(father, mother, coStart, coEnd);
         }
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace GA_Traveling_Sales_Person
         /// </summary>
         /// <param name="father"></param>
         /// <param name="mother"></param>
-        /// <param name="coStartIn"></param>
-        /// <param name="coEndIn"></param>
+        /// <param name="coStartIn">inclusive</param>
+        /// <param name="coEndIn">inclusive</param>
         /// <returns></returns>
-        public Tour PMX1Child(Tour father, Tour mother, int coStartIn, int coEndIn)
+        public Tour CrossOver1Child(Tour father, Tour mother, int coStartIn, int coEndIn)
         {
             //create a child
             Tour child = new Tour(father.Route.Length);
@@ -76,10 +76,10 @@ namespace GA_Traveling_Sales_Person
             int coStart = coStartIn;
             int coEnd = coEndIn;
 
-            //copy the cross over section from the father to the child
+            //copy the cross over section from the mother to the child
             for (int i = coStart; i <= coEnd; i++)
             {
-                child.Route[i] = father.Route[i];
+                child.Route[i] = mother.Route[i];
             }
 
 
