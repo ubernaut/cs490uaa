@@ -45,11 +45,16 @@ namespace GA_Traveling_Sales_Person
 
         private void textBox1_Validated(object sender, EventArgs e)
         {
-        
+            try
+            {
                 popSize = Int32.Parse(textBox1.Text);
-            
+
                 Console.Out.WriteLine(e);
-            
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex);
+            }
 
         }
 
@@ -93,6 +98,12 @@ namespace GA_Traveling_Sales_Person
             //instantiate GA and set in motion
 
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CrossOverTests test = new CrossOverTests();
+            test.Show();
         }
 
     }
