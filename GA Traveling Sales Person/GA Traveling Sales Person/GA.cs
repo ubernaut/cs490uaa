@@ -64,7 +64,7 @@ namespace GA_Traveling_Sales_Person
             for (int i = 0; i < NUMBER_OF_RUNS; i++)
             {
                 pmxBestOfRun[i] = RunAllGens(0);
-                //oxBestOfRun[i] = RunAllGens(1);
+                oxBestOfRun[i] = RunAllGens(1);
                 cxBestOfRun[i] = RunAllGens(2);
             }
 
@@ -86,43 +86,70 @@ namespace GA_Traveling_Sales_Person
                 temp.CalcFitness(graph);
                 population.Add(temp);
             }
-            //setup the roulette wheel with percentages of each individual
-            double[] slice = EvalPopulation(population);
 
-            //spin the wheel and build the selection pool
-            List<Tour> crossOverPool = new List<Tour>();
-            List<Tour> mutatePool = new List<Tour>();
-            List<Tour> reproducePool = new List<Tour>();
-            for (int i = 0; i < popSize; i++)
+            for (int gen = 0; gen < maxGens; gen++)
             {
-                int selectIndex = Selection(slice);
+                //setup the roulette wheel with percentages of each individual
+                double[] slice = EvalPopulation(population);
 
-                //seperate selection pools
-                if (i < Math.Round((popSize * probCrossOver), 0))
+                //spin the wheel and build the selection pool
+                List<Tour> crossOverPool = new List<Tour>();
+                List<Tour> mutatePool = new List<Tour>();
+                List<Tour> reproducePool = new List<Tour>();
+                for (int i = 0; i < popSize; i++)
                 {
-                    crossOverPool.Add(population[selectIndex]);
+                    int selectIndex = Selection(slice);
+
+                    //seperate selection pools
+                    if (i < Math.Round((popSize * probCrossOver), 0))
+                    {
+                        crossOverPool.Add(population[selectIndex]);
+                    }
+                    else if (i < Math.Round((popSize * (probCrossOver + probReproduce)), 0))
+                    {
+                        reproducePool.Add(population[selectIndex]);
+                    }
+                    else if (i < Math.Round((popSize * (probCrossOver + probReproduce + probMutate)), 0))
+                    {
+                        mutatePool.Add(population[selectIndex]);
+                    }
+                    else
+                    {
+                        throw new Exception("Error selecting the right pool");
+                    }
+
                 }
-                else if (i < Math.Round((popSize * (probCrossOver + probReproduce)), 0))
+
+                //do the operations and fill the new generation
+                List<Tour> newPopulation = new List<Tour>(population.Count);
+                crossOverPool = DoCrossOver(crossOverPool, coOp);
+                mutatePool = DoMutate(mutatePool);
+
+                //copy each pool to newPopulation
+                for (int i = 0; i < crossOverPool.Count; i++)
                 {
-                    reproducePool.Add(population[selectIndex]);
+                    newPopulation.Add(crossOverPool[i]);
                 }
-                else if (i < Math.Round((popSize * (probCrossOver + probReproduce + probMutate)), 0))
+                for (int i = 0; i < reproducePool.Count; i++)
                 {
-                    mutatePool.Add(population[selectIndex]);
+                    newPopulation.Add(reproducePool[i]);
                 }
-                else
+                for (int i = 0; i < mutatePool.Count; i++)
                 {
-                    throw new Exception("Error selecting the right pool");
+                    newPopulation.Add(mutatePool[i]);
                 }
+
+                newPopulation.Sort();
+                if (newPopulation[0].Cost < bestOfRun.Cost)
+                {
+                    bestOfRun = newPopulation[0];
+                }
+
+                population = newPopulation;
 
             }
 
-            //do the operations and fill the new generation
-            List<Tour> newPopulation = new List<Tour>(population.Count);
-            crossOverPool =  DoCrossOver(crossOverPool, coOp);
-            mutatePool = DoMutate(mutatePool);
-
-            return new Tour();
+            return bestOfRun;
         }
 
 
@@ -161,15 +188,21 @@ namespace GA_Traveling_Sales_Person
 
         private List<Tour> DoMutate(List<Tour> mutatePool)
         {
-            throw new Exception("The method or operation is not implemented.");
+            Mutate mut = new Mutate();
+
+            for (int i = 0; i < mutatePool.Count; i++)
+            {
+                mutatePool[i] = mut.MutateIt(mutatePool[i]);
+            }
+            return mutatePool;
         }
 
         private double[] EvalPopulation(List<Tour> generation)
         {
-            Tour[] myGeneration=generation.ToArray();
+            Tour[] myGeneration = generation.ToArray();
             int popSize = myGeneration.Length;
             double[] genSlice = new double[popSize];
-            
+
             float sumFit = 0;
             foreach (Tour individual in myGeneration)
             {
@@ -186,14 +219,21 @@ namespace GA_Traveling_Sales_Person
                 genIndex += 1;
             }
 
-            return genSlice;              
-             
+            return genSlice;
+
         }
         private int Selection(double[] theSlices)
-        {           
+        {
             double myPick = rand.NextDouble();
-            for (int i = 0; i < theSlices.Length; i++) if(theSlices[i] <= myPick) return i;
-            return -1000000;
+            int num = -1000000;
+            for (int i = 0; i < theSlices.Length; i++)
+            {
+                if (theSlices[i] <= myPick)
+                {
+                    num= i;
+                }
+            }
+            return num;
         }
 
     }
