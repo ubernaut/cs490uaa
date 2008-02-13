@@ -25,7 +25,7 @@ namespace GA_Traveling_Sales_Person
         private double probMutate;
         private double probReproduce;
         private const int NUMBER_OF_RUNS = 3;
-
+        private Random rand = new Random();
 
         private Tour[] pmxBestOfRun;
         private Tour[] cxBestOfRun;
@@ -75,7 +75,7 @@ namespace GA_Traveling_Sales_Person
         private Tour RunPMX()
         {
             Tour bestOfGeneration;
-            Random rand = new Random();
+            rand = new Random();
 
             //sample population
             List<Tour> population = new List<Tour>();
@@ -136,8 +136,7 @@ namespace GA_Traveling_Sales_Person
                 sumFit += individual.Cost;
             }
             int genIndex = 0;
-            foreach (Tour individual in myGeneration)
-            {
+            foreach (Tour individual in myGeneration){
                 genSlice[genIndex] = individual.Cost/sumFit;
                 genIndex += 1;
             }
@@ -145,20 +144,10 @@ namespace GA_Traveling_Sales_Person
             return genSlice;              
              
         }
-
-
-
-        private void Selection()
-        {
-            /*
-            List<Tour> nextGen = new List<Tour>();
-            
-            
-            foreach(Tour aRoute in population)
-            {
-               float routeChance = aRoute.Cost / currGenFit;
-            }
-            */
+        private int Selection(double[] theSlices)
+        {           
+            myPick = rand.NextDouble();
+            for (int i = 0; i < theSlices.Length; i++) if(theSlices[i] <= myPick) return i;
         }
 
     }
