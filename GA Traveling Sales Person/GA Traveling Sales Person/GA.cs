@@ -91,6 +91,8 @@ namespace GA_Traveling_Sales_Person
 
             for (int gen = 0; gen < maxGens; gen++)
             {
+
+
                 //setup the roulette wheel with percentages of each individual
                 double[] slice = EvalPopulation(population);
 
@@ -139,6 +141,12 @@ namespace GA_Traveling_Sales_Person
                 for (int i = 0; i < mutatePool.Count; i++)
                 {
                     newPopulation.Add(mutatePool[i]);
+                }
+
+                //calc fitness on whole population
+                for (int i = 0; i < newPopulation.Count; i++)
+                {
+                    newPopulation[i].CalcFitness(graph);
                 }
 
                 newPopulation.Sort();

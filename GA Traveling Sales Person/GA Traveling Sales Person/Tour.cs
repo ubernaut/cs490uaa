@@ -71,7 +71,7 @@ namespace GA_Traveling_Sales_Person
             int fitness = 0;
 
             //for each city in the tour
-            for (int i = 0; i < route.Length-2; i++)
+            for (int i = 0; i < route.Length-1; i++)
             {
 
                 //add up the cost from i to i+1
