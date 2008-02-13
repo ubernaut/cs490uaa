@@ -58,6 +58,7 @@ namespace GA_Traveling_Sales_Person
         /// Runs all the Cross over operations 3 times
         /// and records best Tour of run for each
         /// </summary>
+        /// 
         public void Run()
         {
             for (int i = 0; i < NUMBER_OF_RUNS; i++)
@@ -102,12 +103,6 @@ namespace GA_Traveling_Sales_Person
                 List<Tour> mutatePool = new List<Tour>();
                 List<Tour> reproducePool = new List<Tour>();
 
-
-
-
-
-
-
             }
 
 
@@ -127,21 +122,28 @@ namespace GA_Traveling_Sales_Person
             throw new Exception("The method or operation is not implemented.");
         }
 
-        private void EvalPopulation()
+        private double[] EvalPopulation(List<Tour> generation)
         {
-            /*
-              sumFit = 0;
-              foreach (Tour individual in population) 
-              {
 
-                  individual.CalcFitness(lookUp);
-                  sumFit += individual.Cost;
-                  if (individual.Cost < bestOfRun.Cost) bestOfRun = individual;
-                   
-              }
-              currGenFit = sumFit / popSize;
-              genFit.Add(currGenFit);
-             */
+            Tour[] myGeneration=generation.ToArray();
+            int popSize = myGeneration.Length;
+            double[] genSlice = new double[popSize];
+            
+            float sumFit = 0;
+            foreach (Tour individual in myGeneration)
+            {
+                individual.CalcFitness(graph);
+                sumFit += individual.Cost;
+            }
+            int genIndex = 0;
+            foreach (Tour individual in myGeneration)
+            {
+                genSlice[genIndex] = individual.Cost/sumFit;
+                genIndex += 1;
+            }
+
+            return genSlice;              
+             
         }
 
 
