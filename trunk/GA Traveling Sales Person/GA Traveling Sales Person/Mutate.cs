@@ -6,11 +6,7 @@ namespace GA_Traveling_Sales_Person
 {
     class Mutate
     {
-        private TSPGraph myGraph;
-        public Mutate(TSPGraph theGraph) 
-        {
-            myGraph = theGraph;
-        }
+        public Mutate() { }
         public Tour MutateIt(Tour individual)
         {
             Int32 cityCount = individual.Route.Length;
@@ -23,9 +19,7 @@ namespace GA_Traveling_Sales_Person
             Int32 holdCity = mutant[cityA];
             mutant[cityA] = mutant[cityB];
             mutant[cityB] = holdCity;
-
             individual.Route = mutant;
-            individual.CalcFitness(myGraph);
             return individual;
 
         }

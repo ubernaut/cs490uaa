@@ -78,7 +78,6 @@ namespace GA_Traveling_Sales_Person
             //sample population
             List<Tour> population = new List<Tour>();
 
-
             //initialize to random individuals
             //and calculate their fitness
             for (int i = 0; i < popSize; i++)
@@ -86,15 +85,9 @@ namespace GA_Traveling_Sales_Person
                 Tour temp = new Tour(cityCount);
                 temp.CalcFitness(graph);
                 population.Add(temp);
-
-
-
             }
             //setup the roulette wheel with percentages of each individual
             double[] slice = EvalPopulation(population);
-
-
-
 
             //spin the wheel and build the selection pool
             List<Tour> crossOverPool = new List<Tour>();
@@ -128,11 +121,6 @@ namespace GA_Traveling_Sales_Person
             List<Tour> newPopulation = new List<Tour>(population.Count);
             crossOverPool =  DoCrossOver(crossOverPool, coOp);
             mutatePool = DoMutate(mutatePool);
-
-
-
-
-
 
             return new Tour();
         }
