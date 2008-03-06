@@ -25,7 +25,9 @@ namespace EvoStrat
 
 
 
-
+        public Individual()
+        {
+        }
 
 
 

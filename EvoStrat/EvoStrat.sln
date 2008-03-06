@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoStrat", "EvoStrat\EvoStrat.csproj", "{87EB133B-C0D3-4F04-9361-9C0A6794B7DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87EB133B-C0D3-4F04-9361-9C0A6794B7DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EB133B-C0D3-4F04-9361-9C0A6794B7DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EB133B-C0D3-4F04-9361-9C0A6794B7DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EB133B-C0D3-4F04-9361-9C0A6794B7DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
