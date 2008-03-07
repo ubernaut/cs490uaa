@@ -15,8 +15,8 @@ namespace EvoStrat
         private int lambda;
         private double sigmaInit;
         private int termCount;
-        private int numRuns;
-
+        private int maxRuns;
+        private ES myEs;
 
         //other vars
         private bool run;
@@ -24,8 +24,8 @@ namespace EvoStrat
 
 
         //history vars
-        private Individual currRun;
-        private List<Individual> allRuns;
+        private Individual currentGenBest;
+        private List<Individual> allRunBests;
 
         public MainForm()
         {
@@ -39,10 +39,10 @@ namespace EvoStrat
             run = true;
 
             //repeat numRuns times
-            while (run == true && currRunNum < numRuns)
+            while (run == true && currRunNum < maxRuns)
             {
                 //@todo: initialize the ES for the current run with proper params
-                ES myEs = new ES();
+                myEs = new ES();
 
                 while (run == true && myEs.CurrentGen < myEs.TermCount)
                 {
@@ -107,30 +107,66 @@ namespace EvoStrat
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            throw new Exception("The method or operation is not implemented.");
+
+            
+           
             unlockUI();
+
             //clear display boxes
+            textBoxLambda.Clear();
+            textBoxNumRuns.Clear();
+            textBoxMu.Clear();
+            textBoxSigInit.Clear();
+            textBoxTermCount.Clear();
+            textBoxCurrRun.Clear();
+            textBoxAllRuns.Clear();
+
             //clear run counts / progress bar
+
+            currRunNum = 0;
+            progressBar1.Value = 0;
+            
             //clear bestOf variables
+            currentGenBest = new Individual();
+            allRunBests = new List<Individual>();
+
+            myEs = null; 
+
         }
 
         private void buttonRunOne_Click(object sender, EventArgs e)
         {
             lockUI();
-            ES myEs = new ES();
+            if (myEs == null) 
+            {
+                GetInputParams();
+                myEs = new ES(mu, lambda, sigmaInit, termCount, 2);
+                
 
+            }
+            myEs.RunOneGen();
+            currentGenBest = myEs.ChildList[0];
+
+            textBoxCurrRun.Text = currentGenBest.ToString();
 
         }
 
 
-
+    
         private void GetInputParams()
         {
             mu = Int32.Parse(textBoxMu.Text);
             lambda = Int32.Parse(textBoxLambda.Text);
             sigmaInit = Int32.Parse(textBoxSigInit.Text);
             termCount = Int32.Parse(textBoxTermCount.Text);
-            numRuns = Int32.Parse(textBoxNumRuns.Text);
+            maxRuns = Int32.Parse(textBoxNumRuns.Text);
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            GetInputParams();
+            myEs = new ES(mu, lambda, sigmaInit, termCount, 2);
 
         }
 

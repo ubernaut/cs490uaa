@@ -71,12 +71,18 @@ namespace EvoStrat
         private List<Individual> parentList;
         private List<Individual> childList;
 
+        internal List<Individual> ChildList
+        {
+            get { return childList; }
+            
+        }
+
         Random rand = new Random();
         public ES()
         {
            // throw new Exception("Temp constructor, to be removed");
         }
-
+        
         public ES(int muIn, int lambdaIn, double sigmaInitIn, int termCountIn, int dimentionsIn)
         {
             //set properties
@@ -95,7 +101,7 @@ namespace EvoStrat
             //create the initial lambda individuals
             for (int i = 0; i < lambda; i++)
             {
-                childList.Add(new Individual(rand.Next(),sigmaInit) );
+               // childList.Add(new Individual(rand.Next(),sigmaInit) );
             }
 
         }
