@@ -10,9 +10,22 @@ namespace EvoStrat
 {
     public partial class MainForm : Form
     {
-        private bool run;
+        //input params
+        private int mu;
+        private int lambda;
+        private double sigmaInit;
+        private int termCount;
         private int numRuns;
+
+
+        //other vars
+        private bool run;
         private int currRunNum;
+
+
+        //history vars
+        private Individual currRun;
+        private List<Individual> allRuns;
 
         public MainForm()
         {
@@ -44,7 +57,7 @@ namespace EvoStrat
                 }
 
 
-                
+
                 currRunNum++;
             }
 
@@ -59,7 +72,12 @@ namespace EvoStrat
         /// </summary>
         private void lockUI()
         {
-            throw new Exception("The method or operation is not implemented.");
+            textBoxLamda.Enabled = false;
+            textBoxNumRuns.Enabled = false;
+            textBoxMu.Enabled = false;
+            textBoxSigInit.Enabled = false;
+            textBoxTermCount.Enabled = false;
+
         }
 
         /// <summary>
@@ -67,7 +85,12 @@ namespace EvoStrat
         /// </summary>
         private void unlockUI()
         {
-            throw new Exception("The method or operation is not implemented.");
+            textBoxLamda.Enabled = true;
+            textBoxNumRuns.Enabled = true;
+            textBoxMu.Enabled = true;
+            textBoxSigInit.Enabled = true;
+            textBoxTermCount.Enabled = true;
+
         }
 
 
@@ -78,7 +101,7 @@ namespace EvoStrat
         /// <param name="e"></param>
         private void buttonStop_Click(object sender, EventArgs e)
         {
-
+            unlockUI();
             run = false;
         }
 
@@ -87,14 +110,30 @@ namespace EvoStrat
             throw new Exception("The method or operation is not implemented.");
             unlockUI();
             //clear display boxes
-            //clear run counts
+            //clear run counts / progress bar
             //clear bestOf variables
+        }
+
+        private void buttonRunOne_Click(object sender, EventArgs e)
+        {
+            lockUI();
+            ES myEs = new ES();
+
+
         }
 
 
 
+        private void GetInputParams()
+        {
+            mu = Int32.Parse(textBoxMu.Text);
+            lambda = Int32.Parse(textBoxLamda.Text);
+            sigmaInit = Int32.Parse(textBoxSigInit.Text);
+            termCount = Int32.Parse(textBoxTermCount.Text);
+            numRuns = Int32.Parse(textBoxNumRuns.Text);
 
-        
+        }
+
 
     }
 }

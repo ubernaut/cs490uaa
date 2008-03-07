@@ -113,6 +113,8 @@ namespace EvoStrat
 
             Individual parentA;
             Individual parentB;
+
+            //set the X values
             for (int i = 0; i < numOfGenes; i++)
             {
                 //select new parents for each gene
@@ -138,9 +140,23 @@ namespace EvoStrat
                 }
             }
 
+            //Set the sigma values
+            for (int i = 0; i < numOfGenes; i++)
+            {
+                //select new parents for each gene
+                int indexA = rand.Next(0, parentList.Count);
+                parentA = parentList[indexA];
 
-            //TODO:
-            //where do the sigmas come from?
+                int indexB = indexA;
+                //keep getting random numbers until indexA != indexB
+                while (indexA == indexB)
+                {
+                    indexB = rand.Next(0, parentList.Count);
+                }
+                parentB = parentList[indexB];
+
+                child.Sigma[i] = (parentA.Sigma[i] + parentB.Sigma[i]) / 2.0;
+            }
 
 
             return child;
@@ -183,6 +199,8 @@ namespace EvoStrat
         /// <returns></returns>
         private double RandNorm()
         {
+
+
             double x1, x2;
             double w;
             double y1, y2;
