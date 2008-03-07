@@ -71,7 +71,7 @@ namespace EvoStrat
         Random rand = new Random();
         public ES()
         {
-            throw new Exception("Temp constructor, to be removed");
+            //throw new Exception("Temp constructor, to be removed");
         }
 
         public ES(int muIn, int lamdaIn, double sigmaInitIn, int termCountIn, int dimentionsIn)
@@ -130,11 +130,11 @@ namespace EvoStrat
 
                 if (rand.Next(0, 2) == 0)
                 {
-                    child.X[i] = parentA.X[i];
+                    child.X.Add(parentA.X[i]);
                 }
                 else
                 {
-                    child.X[i] = parentB.X[i];
+                    child.X.Add(parentB.X[i]);
                 }
             }
 
@@ -153,7 +153,7 @@ namespace EvoStrat
                 }
                 parentB = parentList[indexB];
 
-                child.Sigma[i] = (parentA.Sigma[i] + parentB.Sigma[i]) / 2.0;
+                child.Sigma.Add((parentA.Sigma[i] + parentB.Sigma[i]) / 2.0);
             }
 
 
@@ -166,7 +166,7 @@ namespace EvoStrat
 
             //for each gene
             double overallLearningRate = tauPrime * RandNorm();
-           
+
             //if newSigma < minSigma
             //newSigma = minSigma
 
@@ -215,6 +215,25 @@ namespace EvoStrat
             //generates 2 rand numbers, but we only want to return one
             return y1;
         }
+
+
+        /// <summary>
+        /// Calculates and sets the fitness value for the individual
+        /// </summary>
+        /// <param name="indiv"></param>
+        private void SetFitness(Individual indiv)
+        {
+            double x1 = indiv.X[0];
+            double x2 = indiv.X[1];
+
+            double fit;
+            fit = 21.5;
+            fit += x1 * Math.Sin(4 * Math.PI * x1);
+            fit += x2 * Math.Sin(20 * Math.PI * x2);
+
+            indiv.Fitness = fit;
+        }
+
 
     }
 }
