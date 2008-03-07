@@ -7,7 +7,7 @@ namespace EvoStrat
     class ES
     {
         private int mu;
-        private int lamda;
+        private int lambda;
         private double sigmaInit;
         private int termCount;
         private int n;
@@ -21,10 +21,10 @@ namespace EvoStrat
             set { mu = value; }
         }
 
-        public int Lamda
+        public int Lambda
         {
-            get { return lamda; }
-            set { lamda = value; }
+            get { return lambda; }
+            set { lambda = value; }
         }
 
         public double SigmaInit
@@ -68,17 +68,20 @@ namespace EvoStrat
         private double tau;
         private double tauPrime;
 
+        private List<Individual> parentList;
+        private List<Individual> childList;
+
         Random rand = new Random();
         public ES()
         {
            // throw new Exception("Temp constructor, to be removed");
         }
 
-        public ES(int muIn, int lamdaIn, double sigmaInitIn, int termCountIn, int dimentionsIn)
+        public ES(int muIn, int lambdaIn, double sigmaInitIn, int termCountIn, int dimentionsIn)
         {
             //set properties
             mu = muIn;
-            lamda = lamdaIn;
+            lambda = lambdaIn;
             sigmaInit = sigmaInitIn;
             termCount = termCountIn;
             n = dimentionsIn;
@@ -87,6 +90,13 @@ namespace EvoStrat
             tau = 1 / Math.Sqrt(2 * n);
             tauPrime = 1 / Math.Sqrt(2 * Math.Sqrt(n));
 
+
+            //create the initial lambda individuals
+            for (int i = 0; i < lambda; i++)
+            {
+                childList.Add(new Individual(rand.Next(),sigmaInit) );
+            }
+
         }
 
         /// <summary>
@@ -94,7 +104,15 @@ namespace EvoStrat
         /// </summary>
         internal void RunOneGen()
         {
-            throw new Exception("The method or operation is not implemented.");
+            //select the mu parents  for this generation
+            childList.Sort();
+            parentList = new List<Individual>();
+
+
+            //do recombination to create lambda new individuals
+
+            //mutate all of the individuals
+
             
         }
 

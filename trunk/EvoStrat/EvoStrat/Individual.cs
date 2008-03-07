@@ -36,12 +36,26 @@ namespace EvoStrat
             set { fitness = value; }
         }
 
-
-
         public Individual()
         {
             x = new List<double>();
             sigma = new List<double>();
+        }
+        /// <summary>
+        /// Creates a new random Individual
+        /// within the constraints and with the specified initial sigma values;
+        /// </summary>
+        public Individual(int randSeed, double sigmaInit)
+        {
+            Random rand = new Random(randSeed);
+            x = new List<double>();
+            sigma = new List<double>();
+
+            x.Add((rand.NextDouble() * 15) - 3);
+            x.Add((rand.NextDouble() * 2) + 4);
+            sigma.Add(sigmaInit);
+            sigma.Add(sigmaInit);
+
         }
         public Individual(List<double> xIn, List<double> sigmaIn)
         {
