@@ -11,7 +11,8 @@ namespace EvoStrat
         private double sigmaInit;
         private int termCount;
         private int n;
-        private double minSigma = 0.0001;
+        private double minSigma = 0.000001;
+        private double[] maxSigma = { 15, 2 };
         int currentGen;
 
         #region Properties
@@ -225,12 +226,11 @@ namespace EvoStrat
             { //newSigma = sigma * exp(tauPrime * N(0,1) + tau * Ni(0,1))
 
                 //calculate the new sigma
-                
                 double coordinateLearningRate = Tau * RandNorm();
                 indivIn.Sigma[i] = indivIn.Sigma[i] * Math.Exp(overallLearningRate + coordinateLearningRate);
                 //calculate the new X based on new sigma
                 if (minSigma > indivIn.Sigma[i]) indivIn.Sigma[i] = minSigma;
-
+                if (maxSigma[i] < indivIn.Sigma[i]) indivIn.Sigma[i] = maxSigma[i];
                 //newX = x + N(0,newSigma)
 
                 double xHolder = indivIn.X[i];
