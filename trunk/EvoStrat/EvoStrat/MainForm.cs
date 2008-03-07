@@ -36,14 +36,18 @@ namespace EvoStrat
         {
             lockUI();
 
+
             run = true;
             textForallRunBox = "";
             GetInputParams();
+            
+            progressBar1.Maximum = termCount;
+            progressBar2.Maximum = maxRuns;
             Individual bestHolder = new Individual();
             //repeat numRuns times
             while (run == true && currRunNum < maxRuns)
             {
-                //@todo: initialize the ES for th current run with proper params
+
                 myEs = new ES(mu, lambda, sigmaInit, termCount, 2);
                 
                 while (run == true && myEs.CurrentGen < myEs.TermCount)
@@ -55,13 +59,15 @@ namespace EvoStrat
                     currentGenBest = myEs.ChildList[0];
                     bestHolder = currentGenBest;
                     textBoxCurrRun.Text = currentGenBest.ToString();
+
+                    progressBar1.Value = myEs.CurrentGen;
                     Application.DoEvents();
-                    myEs.CurrentGen++;
                 }
                 textForallRunBox += "Run: " + currRunNum.ToString() +"Best: "+ currentGenBest.ToString() + "\r\n";
                 textBoxAllRuns.Clear();
                 textBoxAllRuns.Text = textForallRunBox;
                 currRunNum++;
+                progressBar2.Value = currRunNum;
                 Application.DoEvents();
             }
 
@@ -107,6 +113,7 @@ namespace EvoStrat
         {
             unlockUI();
             run = false;
+
         }
 
         private void buttonReset_Click(object sender, EventArgs e)

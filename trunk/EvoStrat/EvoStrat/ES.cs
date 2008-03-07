@@ -147,7 +147,7 @@ namespace EvoStrat
 
             childList.Sort();
 
-
+            currentGen++;
         }
 
         /// <summary>
