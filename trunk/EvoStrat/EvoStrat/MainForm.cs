@@ -144,7 +144,8 @@ namespace EvoStrat
 
             currRunNum = 0;
             progressBar1.Value = 0;
-            
+            progressBar2.Value = 0;
+
             //clear bestOf variables
             currentGenBest = new Individual();
             allRunBests = new List<Individual>();
