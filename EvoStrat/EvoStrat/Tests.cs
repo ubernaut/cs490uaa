@@ -52,5 +52,48 @@ namespace EvoStrat
             child = myEs.Recombination(parentList);
             label4.Text = child.ToString(); ;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ES myES = new ES();
+            double maxValue = -1; 
+            double x1=-999;
+            double total= double.MinValue;
+
+
+            for (double i = -3; i <= 12; i += .0001)
+            {
+                double checkValue = i * Math.Sin(4 * Math.PI * i); 
+                if (checkValue > maxValue)
+                {
+                    maxValue = checkValue;
+                    x1 = i;
+                }
+            }
+
+            label5.Text = "x1: " + x1.ToString();
+            label6.Text = Math.Round(maxValue,2).ToString();
+            total =maxValue;
+
+            double x2 = -999;
+            maxValue = -1; 
+            for (double i = 4; i <= 6; i += .0001)
+            {
+                double checkValue = i * Math.Sin(20 * Math.PI * i);
+                if (checkValue > maxValue)
+                {
+                    maxValue = checkValue;
+                    x2 = i;
+                }
+            }
+
+            label7.Text = "x2: " + x2.ToString();
+            label8.Text = Math.Round(maxValue, 2).ToString();
+
+
+            total += maxValue + 21.5;
+            label9.Text = total.ToString();
+
+        }
     }
 }

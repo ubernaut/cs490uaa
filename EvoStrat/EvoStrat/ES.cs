@@ -75,15 +75,15 @@ namespace EvoStrat
         internal List<Individual> ChildList
         {
             get { return childList; }
-            
+
         }
 
         Random rand = new Random();
         public ES()
         {
-           // throw new Exception("Temp constructor, to be removed");
+            // throw new Exception("Temp constructor, to be removed");
         }
-        
+
         public ES(int muIn, int lambdaIn, double sigmaInitIn, int termCountIn, int dimentionsIn)
         {
             //set properties
@@ -102,7 +102,7 @@ namespace EvoStrat
             //create the initial lambda individuals
             for (int i = 0; i < lambda; i++)
             {
-               childList.Add(new Individual(rand.Next(),sigmaInit) );
+                childList.Add(new Individual(rand.Next(), sigmaInit));
             }
 
         }
@@ -120,13 +120,13 @@ namespace EvoStrat
                 SetFitness(childList[i]);
             }
             childList.Sort();
-            
+
             parentList = new List<Individual>();
             for (int i = 0; i < mu; i++)
             {
                 parentList.Add(childList[i]);
             }
-            
+
 
 
 
@@ -147,7 +147,7 @@ namespace EvoStrat
 
             childList.Sort();
 
-            
+
         }
 
         /// <summary>
@@ -216,35 +216,48 @@ namespace EvoStrat
         {
             Individual newIndiv = new Individual();
 
-            //for each gene
+
             double overallLearningRate = tauPrime * RandNorm();
 
-            //if newSigma < minSigma
-            //newSigma = minSigma
-
+            //for each gene
             for (int i = 0; i < indivIn.X.Count; i++)
-            { //newSigma = sigma * exp(tauPrime * N(0,1) + tau * Ni(0,1))
+            {
 
                 //calculate the new sigma
+                //newSigma = sigma * exp(tauPrime * N(0,1) + tau * Ni(0,1))
                 double coordinateLearningRate = Tau * RandNorm();
-                indivIn.Sigma[i] = indivIn.Sigma[i] * Math.Exp(overallLearningRate + coordinateLearningRate);
-                //calculate the new X based on new sigma
-                if (minSigma > indivIn.Sigma[i]) indivIn.Sigma[i] = minSigma;
+                indivIn.Sigma[i] = indivIn.Sigma[i] * Math.Exp((overallLearningRate + coordinateLearningRate));
                 if (maxSigma[i] < indivIn.Sigma[i]) indivIn.Sigma[i] = maxSigma[i];
-                //newX = x + N(0,newSigma)
+                //if newSigma < minSigma
+                //newSigma = minSigma
+                if (indivIn.Sigma[i] < minSigma)
+                    indivIn.Sigma[i] = minSigma;
 
+
+                //calculate the new X based on new sigma
                 double xHolder = indivIn.X[i];
-
+                //newX = x + N(0,newSigma)
                 indivIn.X[i] = indivIn.X[i] + indivIn.Sigma[i] * RandNorm();
-                
-                //if()
-                if (i == 0) while (-3 > indivIn.X[0] || indivIn.X[0] > 12)
-                    indivIn.X[0] = xHolder + indivIn.Sigma[0] * RandNorm();
 
-                if (i == 1) while (4 > indivIn.X[1] || indivIn.X[1] > 6)
-                    indivIn.X[1] = xHolder + indivIn.Sigma[1] * RandNorm(); 
+
+                if (i == 0)
+                {
+                    while (-3 > indivIn.X[0] || indivIn.X[0] > 12)
+                    {
+                        indivIn.X[0] = xHolder + indivIn.Sigma[0] * RandNorm();
+                    }
+                }
+                else if (i == 1)
+                {
+                    while (4 > indivIn.X[1] || indivIn.X[1] > 6)
+                    {
+                        indivIn.X[1] = xHolder + indivIn.Sigma[1] * RandNorm();
+                    }
+                }
+
+
             }
-            
+
             return indivIn;
         }
 
