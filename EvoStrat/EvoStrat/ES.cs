@@ -151,22 +151,22 @@ namespace EvoStrat
             Individual newIndiv = new Individual();
 
             //for each gene
-            //double overallLearningRate = tauPrime * N(0, 1);
+            double overallLearningRate = tauPrime * RandNorm();
+           
+            //if newSigma < minSigma
+            //newSigma = minSigma
 
             for (int i = 0; i < indivIn.X.Count; i++)
-            {
+            { //newSigma = sigma * exp(tauPrime * N(0,1) + tau * Ni(0,1))
+
                 //calculate the new sigma
-                //double coordinateLearningRate = tau * N(0,1);
-                //newSigma = sigma * exp(tauPrime * N(0,1) + tau * Ni(0,1))
-
-                    //if newSigma < minSigma
-                        //newSigma = minSigma
-
-
+                indivIn.Sigma[i] = indivIn.Sigma[i] * Math.Exp(TauPrime * RandNorm() + Tau * RandNorm());
+                double coordinateLearningRate = tau * RandNorm;
 
                 //calculate the new X based on new sigma
-                //newX = x + N(0,newSigma)
 
+                //newX = x + N(0,newSigma)
+                indivIn.X[i] = indivIn.X[i] + indivIn.Sigma[i] * RandNorm();
 
             }
 
