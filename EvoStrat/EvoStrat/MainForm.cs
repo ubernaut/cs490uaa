@@ -17,7 +17,7 @@ namespace EvoStrat
         private int termCount;
         private int maxRuns;
         private ES myEs;
-
+        private String textForallRunBox;
         //other vars
         private bool run;
         private int currRunNum;
@@ -37,28 +37,32 @@ namespace EvoStrat
             lockUI();
 
             run = true;
-
+            textForallRunBox = "";
+            GetInputParams();
+            Individual bestHolder = new Individual();
             //repeat numRuns times
             while (run == true && currRunNum < maxRuns)
             {
-                //@todo: initialize the ES for the current run with proper params
-                myEs = new ES();
-
+                //@todo: initialize the ES for th current run with proper params
+                myEs = new ES(mu, lambda, sigmaInit, termCount, 2);
+                
                 while (run == true && myEs.CurrentGen < myEs.TermCount)
                 {
                     myEs.RunOneGen();
 
                     //display best of the last generation
                     //in textBoxCurrRun
-
-                    //
-
+                    currentGenBest = myEs.ChildList[0];
+                    bestHolder = currentGenBest;
+                    textBoxCurrRun.Text = currentGenBest.ToString();
+                    Application.DoEvents();
                     myEs.CurrentGen++;
                 }
-
-
-
+                textForallRunBox += "Run: " + currRunNum.ToString() +"Best: "+ currentGenBest.ToString() + "\r\n";
+                textBoxAllRuns.Clear();
+                textBoxAllRuns.Text = textForallRunBox;
                 currRunNum++;
+                Application.DoEvents();
             }
 
 
@@ -157,7 +161,7 @@ namespace EvoStrat
         {
             mu = Int32.Parse(textBoxMu.Text);
             lambda = Int32.Parse(textBoxLambda.Text);
-            sigmaInit = Int32.Parse(textBoxSigInit.Text);
+            sigmaInit = double.Parse(textBoxSigInit.Text);
             termCount = Int32.Parse(textBoxTermCount.Text);
             maxRuns = Int32.Parse(textBoxNumRuns.Text);
 
