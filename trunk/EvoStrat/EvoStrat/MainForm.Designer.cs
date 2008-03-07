@@ -214,7 +214,6 @@ namespace EvoStrat
             // 
             // buttonReset
             // 
-            this.buttonReset.Enabled = false;
             this.buttonReset.Location = new System.Drawing.Point(199, 321);
             this.buttonReset.Margin = new System.Windows.Forms.Padding(4);
             this.buttonReset.Name = "buttonReset";
