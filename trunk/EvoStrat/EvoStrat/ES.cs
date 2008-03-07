@@ -11,7 +11,7 @@ namespace EvoStrat
         private double sigmaInit;
         private int termCount;
         private int n;
-        private double minSigma = 0.000001;
+        private double minSigma = 0.0001;
         private double[] maxSigma = { 15, 2 };
         int currentGen;
 

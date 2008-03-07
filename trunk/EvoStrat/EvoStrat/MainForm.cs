@@ -125,6 +125,14 @@ namespace EvoStrat
             textBoxCurrRun.Clear();
             textBoxAllRuns.Clear();
 
+            textBoxLambda.Text = "49";
+            textBoxNumRuns.Text = "10";
+            textBoxMu.Text ="7";
+            textBoxSigInit.Text = "1";
+            textBoxTermCount.Text = "2000";
+            
+            
+
             //clear run counts / progress bar
 
             currRunNum = 0;
