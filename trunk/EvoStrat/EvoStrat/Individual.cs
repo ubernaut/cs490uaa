@@ -6,6 +6,11 @@ namespace EvoStrat
 {
     class Individual
     {
+        double x1Min = -3;
+        double x1Max =12;
+        double x2Min = 4;
+        double x2Max = 6;
+
         List<double> x;
 
         public List<double> X
@@ -23,10 +28,25 @@ namespace EvoStrat
         }
 
 
+        double fitness;
+
+        public double Fitness
+        {
+            get { return fitness; }
+            set { fitness = value; }
+        }
+
 
 
         public Individual()
         {
+            x = new List<double>();
+            sigma = new List<double>();
+        }
+        public Individual(List<double> xIn, List<double> sigmaIn)
+        {
+            x = xIn;
+            sigma = sigmaIn;
         }
 
 
@@ -35,10 +55,19 @@ namespace EvoStrat
         public override string ToString()
         {
 
-            throw new Exception("Individual.ToString() not yet imlemented");
+            string text = "";
+            text = "X{" + x[0];
+            for(int i=1; i<x.Count; i++){
+                text += ","+x[i];
+            }
 
-            //string text = "";
-            //return text;
+            text += "} Sigma{" + sigma[0];
+            for (int i = 1; i < sigma.Count; i++)
+            {
+                text += "," +sigma[i];
+            }
+            text += "}";
+            return text;
         }
 
     }
