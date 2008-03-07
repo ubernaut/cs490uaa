@@ -71,7 +71,7 @@ namespace EvoStrat
         Random rand = new Random();
         public ES()
         {
-            //throw new Exception("Temp constructor, to be removed");
+           // throw new Exception("Temp constructor, to be removed");
         }
 
         public ES(int muIn, int lamdaIn, double sigmaInitIn, int termCountIn, int dimentionsIn)
