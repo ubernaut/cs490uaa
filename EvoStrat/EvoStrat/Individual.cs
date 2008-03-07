@@ -68,17 +68,18 @@ namespace EvoStrat
 
         public override string ToString()
         {
+            int roundDigits = 3;
 
-            string text = "";
-            text = "X{" + x[0];
+            string text = "Fit:" + Math.Round(fitness,roundDigits);
+            text += " X{" + Math.Round(x[0],roundDigits);
             for(int i=1; i<x.Count; i++){
-                text += ","+x[i];
+                text += "," + Math.Round(x[i], roundDigits);
             }
 
-            text += "} Sigma{" + sigma[0];
+            text += "} Sigma{" + Math.Round(sigma[0],roundDigits);
             for (int i = 1; i < sigma.Count; i++)
             {
-                text += "," +sigma[i];
+                text += "," + Math.Round(sigma[i], roundDigits);
             }
             text += "}";
             return text;
