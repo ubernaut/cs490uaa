@@ -36,7 +36,7 @@ namespace EvoStrat
         {
             lockUI();
 
-
+            buttonStart.Enabled = false;
             run = true;
             textForallRunBox = "";
             GetInputParams();
@@ -119,7 +119,7 @@ namespace EvoStrat
         private void buttonReset_Click(object sender, EventArgs e)
         {
 
-            
+            buttonStart.Enabled = true;
            
             unlockUI();
 
