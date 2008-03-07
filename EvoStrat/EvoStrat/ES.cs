@@ -11,7 +11,7 @@ namespace EvoStrat
         private double sigmaInit;
         private int termCount;
         private int n;
-
+        private double minSigma = 0.0001;
         int currentGen;
 
         #region Properties
@@ -89,15 +89,13 @@ namespace EvoStrat
 
         }
 
-
-
-
-
-
-
+        /// <summary>
+        /// 
+        /// </summary>
         internal void RunOneGen()
         {
             throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -176,16 +174,18 @@ namespace EvoStrat
             { //newSigma = sigma * exp(tauPrime * N(0,1) + tau * Ni(0,1))
 
                 //calculate the new sigma
-                indivIn.Sigma[i] = indivIn.Sigma[i] * Math.Exp(TauPrime * RandNorm() + Tau * RandNorm());
-                double coordinateLearningRate = tau * RandNorm;
-
+                
+                double coordinateLearningRate = tau * RandNorm();
+                indivIn.Sigma[i] = indivIn.Sigma[i] * Math.Exp(overallLearningRate + coordinateLearningRate);
                 //calculate the new X based on new sigma
+                if (minSigma > indivIn.Sigma[i]) indivIn.Sigma[i] = minSigma;
 
                 //newX = x + N(0,newSigma)
                 indivIn.X[i] = indivIn.X[i] + indivIn.Sigma[i] * RandNorm();
-
+                //if()
+                if (i == 0) while (-3 <indivIn.X[0] < 12) indivIn.X[1] = indivIn.X[1] + indivIn.Sigma[1] * RandNorm();
+                if (i == 1) while (4 < indivIn.X[1] < 6) indivIn.X[1] = indivIn.X[1] + indivIn.Sigma[1] * RandNorm(); 
             }
-
 
 
             return newIndiv;
@@ -199,8 +199,6 @@ namespace EvoStrat
         /// <returns></returns>
         private double RandNorm()
         {
-
-
             double x1, x2;
             double w;
             double y1, y2;
