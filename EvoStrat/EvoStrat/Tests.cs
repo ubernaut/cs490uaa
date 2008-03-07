@@ -28,7 +28,7 @@ namespace EvoStrat
             int mu = 3;
             for (int i = 0; i < mu; i++)
             {
-                Individual temp = new Individual();
+                Individual temp = new Individual(rand.Next(), 1);
                 temp.X.Add((rand.NextDouble() * 15) - 3);
                 temp.X.Add((rand.NextDouble() * 2) + 4);
                 temp.Sigma.Add(rand.NextDouble());
@@ -47,8 +47,8 @@ namespace EvoStrat
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ES myEs = new ES();
-
+            ES myEs = new ES(3,21,1,20000,2);
+            myEs.RunOneGen();
             child = myEs.Recombination(parentList);
             label4.Text = child.ToString(); ;
         }

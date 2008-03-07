@@ -31,7 +31,7 @@ namespace EvoStrat
             this.textBoxMu = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxLamda = new System.Windows.Forms.TextBox();
+            this.textBoxLambda = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxSigInit = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,15 +73,15 @@ namespace EvoStrat
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Lamda";
+            this.label2.Text = "Lambda";
             // 
-            // textBoxLamda
+            // textBoxLambda
             // 
-            this.textBoxLamda.Location = new System.Drawing.Point(111, 47);
-            this.textBoxLamda.Name = "textBoxLamda";
-            this.textBoxLamda.Size = new System.Drawing.Size(46, 20);
-            this.textBoxLamda.TabIndex = 2;
-            this.textBoxLamda.Text = "21";
+            this.textBoxLambda.Location = new System.Drawing.Point(111, 47);
+            this.textBoxLambda.Name = "textBoxLambda";
+            this.textBoxLambda.Size = new System.Drawing.Size(46, 20);
+            this.textBoxLambda.TabIndex = 2;
+            this.textBoxLambda.Text = "21";
             // 
             // label3
             // 
@@ -237,7 +237,7 @@ namespace EvoStrat
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxSigInit);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxLamda);
+            this.Controls.Add(this.textBoxLambda);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxMu);
             this.Name = "MainForm";
@@ -252,7 +252,7 @@ namespace EvoStrat
         private System.Windows.Forms.TextBox textBoxMu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxLamda;
+        private System.Windows.Forms.TextBox textBoxLambda;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxSigInit;
         private System.Windows.Forms.Label label4;

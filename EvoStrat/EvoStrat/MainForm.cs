@@ -72,7 +72,7 @@ namespace EvoStrat
         /// </summary>
         private void lockUI()
         {
-            textBoxLamda.Enabled = false;
+            textBoxLambda.Enabled = false;
             textBoxNumRuns.Enabled = false;
             textBoxMu.Enabled = false;
             textBoxSigInit.Enabled = false;
@@ -85,7 +85,7 @@ namespace EvoStrat
         /// </summary>
         private void unlockUI()
         {
-            textBoxLamda.Enabled = true;
+            textBoxLambda.Enabled = true;
             textBoxNumRuns.Enabled = true;
             textBoxMu.Enabled = true;
             textBoxSigInit.Enabled = true;
@@ -127,7 +127,7 @@ namespace EvoStrat
         private void GetInputParams()
         {
             mu = Int32.Parse(textBoxMu.Text);
-            lambda = Int32.Parse(textBoxLamda.Text);
+            lambda = Int32.Parse(textBoxLambda.Text);
             sigmaInit = Int32.Parse(textBoxSigInit.Text);
             termCount = Int32.Parse(textBoxTermCount.Text);
             numRuns = Int32.Parse(textBoxNumRuns.Text);
