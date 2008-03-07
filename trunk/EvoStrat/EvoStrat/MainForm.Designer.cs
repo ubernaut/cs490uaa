@@ -46,6 +46,7 @@ namespace EvoStrat
             this.buttonStop = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonReset = new System.Windows.Forms.Button();
+            this.buttonRunOne = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxMu
@@ -205,11 +206,22 @@ namespace EvoStrat
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
+            // buttonRunOne
+            // 
+            this.buttonRunOne.Location = new System.Drawing.Point(16, 232);
+            this.buttonRunOne.Name = "buttonRunOne";
+            this.buttonRunOne.Size = new System.Drawing.Size(100, 23);
+            this.buttonRunOne.TabIndex = 18;
+            this.buttonRunOne.Text = "Run One Gen";
+            this.buttonRunOne.UseVisualStyleBackColor = true;
+            this.buttonRunOne.Click += new System.EventHandler(this.buttonRunOne_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 298);
+            this.Controls.Add(this.buttonRunOne);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonStop);
@@ -255,6 +267,7 @@ namespace EvoStrat
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Button buttonRunOne;
     }
 }
 
