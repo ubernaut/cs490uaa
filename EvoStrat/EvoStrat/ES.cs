@@ -175,20 +175,26 @@ namespace EvoStrat
 
                 //calculate the new sigma
                 
-                double coordinateLearningRate = tau * RandNorm();
+                double coordinateLearningRate = Tau * RandNorm();
                 indivIn.Sigma[i] = indivIn.Sigma[i] * Math.Exp(overallLearningRate + coordinateLearningRate);
                 //calculate the new X based on new sigma
                 if (minSigma > indivIn.Sigma[i]) indivIn.Sigma[i] = minSigma;
 
                 //newX = x + N(0,newSigma)
+
+                double xHolder = indivIn.X[i];
+
                 indivIn.X[i] = indivIn.X[i] + indivIn.Sigma[i] * RandNorm();
+                
                 //if()
-                if (i == 0) while (-3 <indivIn.X[0] < 12) indivIn.X[1] = indivIn.X[1] + indivIn.Sigma[1] * RandNorm();
-                if (i == 1) while (4 < indivIn.X[1] < 6) indivIn.X[1] = indivIn.X[1] + indivIn.Sigma[1] * RandNorm(); 
+                if (i == 0) while (-3 > indivIn.X[0] || indivIn.X[0] > 12)
+                    indivIn.X[0] = xHolder + indivIn.Sigma[0] * RandNorm();
+
+                if (i == 1) while (4 > indivIn.X[1] || indivIn.X[1] > 6)
+                    indivIn.X[1] = xHolder + indivIn.Sigma[1] * RandNorm(); 
             }
-
-
-            return newIndiv;
+            
+            return indivIn;
         }
 
         /// <summary>

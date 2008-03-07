@@ -85,6 +85,7 @@
     <Compile Include="RandNormTest.Designer.cs">
       <DependentUpon>RandNormTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestMutation.cs" />
     <Compile Include="Tests.cs">
       <SubType>Form</SubType>
     </Compile>
