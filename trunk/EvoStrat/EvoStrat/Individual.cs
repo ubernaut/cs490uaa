@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EvoStrat
 {
-    class Individual
+    class Individual : IComparable<Individual>
     {
         double x1Min = -3;
         double x1Max =12;
@@ -84,5 +84,32 @@ namespace EvoStrat
             return text;
         }
 
+
+        #region IComparable<Individual> Members
+
+        public int CompareTo(Individual other)
+        {
+            int order;
+            if (this.Fitness > other.Fitness)
+            {
+                order = -1;
+            }
+            else if (this.Fitness == other.Fitness)
+            {
+                order = 0;
+            }
+            else if (this.Fitness < other.Fitness)
+            {
+                order = 1;
+            }
+            else
+            {
+                throw new Exception("Individual CompareTo() error!");
+            }
+
+            return order;
+        }
+
+        #endregion
     }
 }

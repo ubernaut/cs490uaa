@@ -90,6 +90,7 @@ namespace EvoStrat
             tau = 1 / Math.Sqrt(2 * n);
             tauPrime = 1 / Math.Sqrt(2 * Math.Sqrt(n));
 
+            childList = new List<Individual>();
 
             //create the initial lambda individuals
             for (int i = 0; i < lambda; i++)
@@ -102,16 +103,41 @@ namespace EvoStrat
         /// <summary>
         /// 
         /// </summary>
-        internal void RunOneGen()
+        public void RunOneGen()
         {
             //select the mu parents  for this generation
+
+            //calc fitness on all the children
+            for (int i = 0; i < childList.Count; i++)
+            {
+                SetFitness(childList[i]);
+            }
             childList.Sort();
+            
             parentList = new List<Individual>();
+            for (int i = 0; i < mu; i++)
+            {
+                parentList.Add(childList[i]);
+            }
+            
+
 
 
             //do recombination to create lambda new individuals
+            childList.Clear();
+            for (int i = 0; i < lambda; i++)
+            {
+                childList.Add(Recombination(parentList));
+            }
+
 
             //mutate all of the individuals
+            for (int i = 0; i < childList.Count; i++)
+            {
+                childList[i] = Mutation(childList[i]);
+            }
+
+            childList.Sort();
 
             
         }
