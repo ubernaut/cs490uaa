@@ -101,7 +101,7 @@ namespace EvoStrat
             //create the initial lambda individuals
             for (int i = 0; i < lambda; i++)
             {
-               // childList.Add(new Individual(rand.Next(),sigmaInit) );
+               childList.Add(new Individual(rand.Next(),sigmaInit) );
             }
 
         }
@@ -141,6 +141,7 @@ namespace EvoStrat
             for (int i = 0; i < childList.Count; i++)
             {
                 childList[i] = Mutation(childList[i]);
+                SetFitness(childList[i]);
             }
 
             childList.Sort();
